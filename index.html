@@ -56,17 +56,32 @@
             display: inline-block;
         }
 
-        /* The Typing Cursor Effect */
-        h1::after {
-            content: '';
-            position: absolute;
-            right: -10px;
-            top: 5px;
-            height: 80%;
-            width: 5px;
-            background-color: var(--neon-aqua);
-            animation: blink 1s infinite;
+/* Typewriter effect for name */
+        .typewriter {
+            display: inline-block;
+            position: relative;
+            overflow: hidden;              /* hide text until "typed" */
+            white-space: nowrap;           /* keep on one line */
+            border-right: 5px solid var(--neon-aqua); /* cursor */
+            width: 0;                      /* start hidden */
+            animation:
+                typing 2.5s steps(14, end) forwards,
+                cursor-blink 0.9s step-end infinite;
         }
+
+        /* Typing animation (increase width from 0 to full) */
+        @keyframes typing {
+            from { width: 0; }
+            to   { width: 14ch; }          /* adjust to match character count */
+        }
+
+        /* Cursor blink animation */
+        @keyframes cursor-blink {
+            0%, 100% { border-right-color: transparent; }
+            50%      { border-right-color: var(--neon-aqua); }
+        }
+
+        
 
         .subtitle {
             font-size: 1.2rem;
@@ -185,6 +200,63 @@
             margin-top: 0;
         }
 
+        .grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+        }
+
+    /* UPDATED CARD BLOCK */
+        .card {
+            background: var(--bg-card);
+            padding: 25px;
+            border: 1px solid #333;
+            border-radius: 8px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy effect */
+            position: relative;
+            overflow: hidden;
+
+            max-width: 260px;  /* <-- added */
+            margin: 0 auto;   /* <-- added (centers card in grid cell) */
+        }
+
+        /* NEW: shrink images inside cards */
+        .card img {
+            width: 70%;          /* try 60–80% to taste */
+            max-width: 250px;    /* prevents huge images from blowing up the card */
+            display: block;
+            margin: 0 auto 15px;
+            border-radius: 4px;
+        }
+
+        /* Neon sweep effect on hover */
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 200, 0.1), transparent);
+            transition: 0.5s;
+        }
+
+        .card:hover::before {
+            left: 100%;
+        }
+
+        .card:hover {
+            border-color: var(--neon-aqua);
+            box-shadow: 0 0 20px rgba(0, 255, 200, 0.2);
+            transform: translateY(-8px);
+        }
+
+        .card h3 {
+            color: var(--neon-aqua);
+            margin-top: 0;
+        }
+
+
         /* 5. SKILLS ICONS */
         .icon-grid {
             display: flex;
@@ -192,6 +264,7 @@
             flex-wrap: wrap;
         }
 
+        /* base tech-icon (for any non-slider use) */
         .tech-icon {
             width: 60px;
             height: 60px;
@@ -209,6 +282,45 @@
             transform: scale(1.1);
             box-shadow: 0 0 10px var(--neon-aqua);
         }
+
+        /* conveyor-style skills slider */
+        .skills-slider {
+            overflow: hidden;
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        .skills-track {
+            display: flex;
+            gap: 20px;
+            animation: skills-scroll 25s linear infinite;
+        }
+
+        /* tech icons inside the slider */
+        .skills-track .tech-icon {
+            flex-shrink: 0; /* do not shrink in the conveyor */
+        }
+
+        .skills-track .tech-icon img {
+            width: 100%;
+            height: auto;
+        }
+
+        /* pause animation on hover (optional) */
+        .skills-slider:hover .skills-track {
+            animation-play-state: paused;
+        }
+
+        /* infinite horizontal scroll */
+        @keyframes skills-scroll {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
 
         /* 6. RESUME BUTTONS */
         .resume-section {
@@ -290,7 +402,7 @@
 
     <div class="container">
         <header>
-            <h1>Tania I. Ortiz</h1>
+            <h1 class="typewriter">Tania I. Ortiz</h1>
             <div class="subtitle">BBA Cybersecurity Student</div>
             <nav>
                 <a href="#about">About</a>
@@ -305,19 +417,66 @@
             <h2>About Me</h2>
             <p>
                 I am a driven cybersecurity student with a focus on securing software and data analytics. 
-                Bridging technical security and business strategy to protect organizations from digital threats and financial crime.
+                I have a passion for learning new technologies and applying them to solve real-world problems and enhance security measures.
             </p>
         </section>
 
+    
+
         <section id="skills">
             <h2>Technical Skills</h2>
-            <p>Programming Languages & Scripting:</p>
-            <div class="icon-grid">
-                <div class="tech-icon"><img src="assets/images/python.png" alt="Python" style="width:100%"></div>
-                <div class="tech-icon"><img src="assets/images/powershell.png" alt="PowerShell" style="width:100%"></div>
-                <div class="tech-icon"><img src="assets/images/web-combo.png" alt="Bash" style="width:100%"></div>
-            </div>
-        </section>
+            <p>Applications, Operating Systems, Programming Languages, & Scripting:</p>
+
+            <div class="skills-slider">
+            <div class="skills-track">
+            <!-- full set of icons (1st pass) -->
+                <div class="tech-icon"><img src="assets/images/ArcGIS-Pro.png" alt="ArcGIS Pro"></div>
+                <div class="tech-icon"><img src="assets/images/Autocad.png" alt="AUTOCAD"></div>
+                <div class="tech-icon"><img src="assets/images/Docker.png" alt="Docker"></div>
+                <div class="tech-icon"><img src="assets/images/GitLab.png" alt="GitLab"></div>
+                <div class="tech-icon"><img src="assets/images/Gradio.png" alt="Gradio"></div>
+                <div class="tech-icon"><img src="assets/images/Grafana.png" alt="Grafana"></div>
+                <div class="tech-icon"><img src="assets/images/Kubernetes.png" alt="Kubernetes"></div>
+                <div class="tech-icon"><img src="assets/images/MicrosoftOffice.png" alt="Microsoft Office"></div>
+                <div class="tech-icon"><img src="assets/images/Prometheus.png" alt="Prometheus"></div>
+                <div class="tech-icon"><img src="assets/images/QGIS.png" alt="QGIS"></div>
+                <div class="tech-icon"><img src="assets/images/ServiceNow.png" alt="ServiceNow"></div>
+                <div class="tech-icon"><img src="assets/images/SolidWorks-Logo.png" alt="SolidWorks"></div>
+                <div class="tech-icon"><img src="assets/images/StreamLit.png" alt="StreamLit"></div>
+                <div class="tech-icon"><img src="assets/images/Linux.png" alt="Linux"></div>
+                <div class="tech-icon"><img src="assets/images/MacOS.png" alt="MacOS"></div>
+                <div class="tech-icon"><img src="assets/images/windows.png" alt="Windows"></div>
+                <div class="tech-icon"><img src="assets/images/web-combo.png" alt="Web Combo"></div>
+                <div class="tech-icon"><img src="assets/images/python.png" alt="Python"></div>
+                <div class="tech-icon"><img src="assets/images/bash.png" alt="Bash"></div>
+                <div class="tech-icon"><img src="assets/images/powershell.png" alt="PowerShell"></div>
+
+                <!-- duplicate set of icons (2nd pass for seamless loop) -->
+                <div class="tech-icon"><img src="assets/images/ArcGIS-Pro.png" alt="ArcGIS Pro"></div>
+                <div class="tech-icon"><img src="assets/images/Autocad.png" alt="AUTOCAD"></div>
+                <div class="tech-icon"><img src="assets/images/Docker.png" alt="Docker"></div>
+                <div class="tech-icon"><img src="assets/images/GitLab.png" alt="GitLab"></div>
+                <div class="tech-icon"><img src="assets/images/Gradio.png" alt="Gradio"></div>
+                <div class="tech-icon"><img src="assets/images/Grafana.png" alt="Grafana"></div>
+                <div class="tech-icon"><img src="assets/images/Kubernetes.png" alt="Kubernetes"></div>
+                <div class="tech-icon"><img src="assets/images/MicrosoftOffice.png" alt="Microsoft Office"></div>
+                <div class="tech-icon"><img src="assets/images/Prometheus.png" alt="Prometheus"></div>
+                <div class="tech-icon"><img src="assets/images/QGIS.png" alt="QGIS"></div>
+                <div class="tech-icon"><img src="assets/images/ServiceNow.png" alt="ServiceNow"></div>
+                <div class="tech-icon"><img src="assets/images/SolidWorks-Logo.png" alt="SolidWorks"></div>
+                <div class="tech-icon"><img src="assets/images/StreamLit.png" alt="StreamLit"></div>
+                <div class="tech-icon"><img src="assets/images/Linux.png" alt="Linux"></div>
+                <div class="tech-icon"><img src="assets/images/MacOS.png" alt="MacOS"></div>
+                <div class="tech-icon"><img src="assets/images/windows.png" alt="Windows"></div>
+                <div class="tech-icon"><img src="assets/images/web-combo.png" alt="Web Combo"></div>
+                <div class="tech-icon"><img src="assets/images/python.png" alt="Python"></div>
+                <div class="tech-icon"><img src="assets/images/bash.png" alt="Bash"></div>
+                <div class="tech-icon"><img src="assets/images/powershell.png" alt="PowerShell"></div>
+             </div>
+        </div>
+    </section>
+
+        
 
         <section id="projects">
             <h2>Projects</h2>
@@ -363,16 +522,17 @@
             </div>
         </section>
 
+
         <section id="resume" class="resume-section">
             <h2>Connect & Resume</h2>
             <p>Feel free to reach out for collaborations or opportunities.</p>
-            <p><strong>Email:</strong> my email</p>
+            <p><strong>Email: </strong> tania.ortiz@my.utsa.edu</p>
 
             <div style="margin-top: 30px;">
-                <a href="https://www.linkedin.com/in/tania--ortiz" class="btn">Connect with Me</a>
-                <a href="https://github.com/by-tayo" class="btn">Link to my GitHub</a>
-                <a href="https://medium.com/@bytayo" class="btn">My Blog</a>
-                <a href="https://www.youtube.com/@tayeotan" class="btn">My Demos</a>
+                <a href="https://www.linkedin.com/in/tania--ortiz" class="btn">LinkedIn</a>
+                <a href="https://github.com/by-tayo" class="btn">GitHub</a>
+                <a href="https://medium.com/@bytayo" class="btn">Medium</a>
+                <a href="https://www.youtube.com/@tayeotan" class="btn">YouTube</a>
             </div>
             
             <p style="margin-top: 30px; font-size: 0.8rem; opacity: 0.6;">
