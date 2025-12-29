@@ -7,8 +7,8 @@
 
     <style>
         :root {
-            /* Color Palette */
-            --bg-primary: #050505;
+          /* Color Palette */
+          --bg-primary: #050505;
             --bg-card: #0f1214;
             --text-primary: #e0e0e0;
             --neon-aqua: #00ffc8;
@@ -20,16 +20,19 @@
             scroll-behavior: smooth; /* Makes clicking nav links scroll smoothly */
         }
 
-        body {
-            font-family: "Yu Mincho", "Hiragino Mincho ProN", "Noto Serif JP",
-               "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden; /* Prevents scrollbar from animations */
-        }
+       body {
+        font-family: "Yu Mincho", "Hiragino Mincho ProN", "Noto Serif JP",
+        "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background:
+            radial-gradient(circle at top left,  rgba(26, 20, 16, 0.7), transparent 55%),
+            radial-gradient(circle at bottom right, rgba(15, 23, 30, 0.8), transparent 55%),
+            linear-gradient(135deg, #050609 0%, #111216 40%, #1a1410 100%);
+        color: var(--text-primary);
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+    }
 
         .container {
             max-width: 1000px;
@@ -223,7 +226,7 @@
         /* NEW: shrink images inside cards */
         .card img {
             width: 70%;          /* try 60–80% to taste */
-            max-width: 250px;    /* prevents huge images from blowing up the card */
+            max-width: 200px;    /* prevents huge images from blowing up the card */
             display: block;
             margin: 0 auto 15px;
             border-radius: 4px;
@@ -256,69 +259,29 @@
             margin-top: 0;
         }
 
-
         /* 5. SKILLS ICONS */
         .icon-grid {
             display: flex;
-            gap: 20px;
             flex-wrap: wrap;
+            gap: 40px;              /* spacing between icons */
         }
 
-        /* base tech-icon (for any non-slider use) */
+        /* container only for spacing/alignment, no box styling */
         .tech-icon {
-            width: 60px;
-            height: 60px;
-            background: #1a1d20;
-            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid #333;
-            transition: 0.3s;
         }
 
-        .tech-icon:hover {
-            border-color: var(--neon-aqua);
-            transform: scale(1.1);
-            box-shadow: 0 0 10px var(--neon-aqua);
-        }
-
-        /* conveyor-style skills slider */
-        .skills-slider {
-            overflow: hidden;
-            width: 100%;
-            margin-top: 15px;
-        }
-
-        .skills-track {
-            display: flex;
-            gap: 20px;
-            animation: skills-scroll 25s linear infinite;
-        }
-
-        /* tech icons inside the slider */
-        .skills-track .tech-icon {
-            flex-shrink: 0; /* do not shrink in the conveyor */
-        }
-
-        .skills-track .tech-icon img {
-            width: 100%;
+        /* control image size directly */
+        .tech-icon img {
+            width: 60px;            /* try 24–40px as needed */
             height: auto;
         }
 
-        /* pause animation on hover (optional) */
-        .skills-slider:hover .skills-track {
-            animation-play-state: paused;
-        }
-
-        /* infinite horizontal scroll */
-        @keyframes skills-scroll {
-            from {
-                transform: translateX(0);
-            }
-            to {
-                transform: translateX(-50%);
-            }
+        .tech-icon:hover {
+            /* optional subtle hover; remove if you want nothing */
+            transform: scale(1.05);
         }
 
 
@@ -417,19 +380,16 @@
             <h2>About Me</h2>
             <p>
                 I am a driven cybersecurity student with a focus on securing software and data analytics. 
-                I have a passion for learning new technologies and applying them to solve real-world problems and enhance security measures.
+                I have a passion for learning new technologies and applying them to solve real-world problems and enhance security measures. 
+                
             </p>
         </section>
-
-    
 
         <section id="skills">
             <h2>Technical Skills</h2>
             <p>Applications, Operating Systems, Programming Languages, & Scripting:</p>
-
-            <div class="skills-slider">
-            <div class="skills-track">
-            <!-- full set of icons (1st pass) -->
+        
+            <div class="icon-grid">
                 <div class="tech-icon"><img src="assets/images/ArcGIS-Pro.png" alt="ArcGIS Pro"></div>
                 <div class="tech-icon"><img src="assets/images/Autocad.png" alt="AUTOCAD"></div>
                 <div class="tech-icon"><img src="assets/images/Docker.png" alt="Docker"></div>
@@ -450,53 +410,30 @@
                 <div class="tech-icon"><img src="assets/images/python.png" alt="Python"></div>
                 <div class="tech-icon"><img src="assets/images/bash.png" alt="Bash"></div>
                 <div class="tech-icon"><img src="assets/images/powershell.png" alt="PowerShell"></div>
+            </div>
+        </section>
 
-                <!-- duplicate set of icons (2nd pass for seamless loop) -->
-                <div class="tech-icon"><img src="assets/images/ArcGIS-Pro.png" alt="ArcGIS Pro"></div>
-                <div class="tech-icon"><img src="assets/images/Autocad.png" alt="AUTOCAD"></div>
-                <div class="tech-icon"><img src="assets/images/Docker.png" alt="Docker"></div>
-                <div class="tech-icon"><img src="assets/images/GitLab.png" alt="GitLab"></div>
-                <div class="tech-icon"><img src="assets/images/Gradio.png" alt="Gradio"></div>
-                <div class="tech-icon"><img src="assets/images/Grafana.png" alt="Grafana"></div>
-                <div class="tech-icon"><img src="assets/images/Kubernetes.png" alt="Kubernetes"></div>
-                <div class="tech-icon"><img src="assets/images/MicrosoftOffice.png" alt="Microsoft Office"></div>
-                <div class="tech-icon"><img src="assets/images/Prometheus.png" alt="Prometheus"></div>
-                <div class="tech-icon"><img src="assets/images/QGIS.png" alt="QGIS"></div>
-                <div class="tech-icon"><img src="assets/images/ServiceNow.png" alt="ServiceNow"></div>
-                <div class="tech-icon"><img src="assets/images/SolidWorks-Logo.png" alt="SolidWorks"></div>
-                <div class="tech-icon"><img src="assets/images/StreamLit.png" alt="StreamLit"></div>
-                <div class="tech-icon"><img src="assets/images/Linux.png" alt="Linux"></div>
-                <div class="tech-icon"><img src="assets/images/MacOS.png" alt="MacOS"></div>
-                <div class="tech-icon"><img src="assets/images/windows.png" alt="Windows"></div>
-                <div class="tech-icon"><img src="assets/images/web-combo.png" alt="Web Combo"></div>
-                <div class="tech-icon"><img src="assets/images/python.png" alt="Python"></div>
-                <div class="tech-icon"><img src="assets/images/bash.png" alt="Bash"></div>
-                <div class="tech-icon"><img src="assets/images/powershell.png" alt="PowerShell"></div>
-             </div>
-        </div>
-    </section>
 
         
-
         <section id="projects">
             <h2>Projects</h2>
             <div class="grid-container">
 
                 <article class="card">
                     <h3>Filesystem Information</h3>
-                    <p>Generating information from a filesystem. Works for Linux, MacOS, and Windows.</p>
+                    <p>Generating system information for Windows OS.</p>
                     <a href="https://github.com/by-tayo/filesystem-information" style="color:white; text-decoration: underline;">View Code &rarr;</a>
                 </article>
 
                 <article class="card">
                     <h3>Cloud Storage Cleaner</h3>
-                    <p>Automated scripts for identifying and removing redundant data in cloud environments for iOS and Android.</p>
+                    <p>A mobile app for identifying and removing redundant data in cloud environments for iOS and Android.</p>
                     <a href="https://github.com/by-tayo/cloud-storage-cleaner" style="color:white; text-decoration: underline;">View Code &rarr;</a>
                 </article>
 
                 <article class="card">
                     <h3>SOC CLI Toolkit</h3>
-                    <p>A command-line interface toolkit designed to contain an all-in-one kit for SOC analysts.</p>
+                    <p>A command-line interface toolkit designed to contain the necessary tools for acing my TCM PSAA exam.</p>
                     <a href="https://github.com/by-tayo/soc-cli-toolkit" style="color:white; text-decoration: underline;">View Code &rarr;</a>
                 </article>
 
