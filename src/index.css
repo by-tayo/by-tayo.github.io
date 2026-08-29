@@ -1,0 +1,259 @@
+@import 'tailwindcss';
+
+/* class-based dark mode (Tailwind v4) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ------------------------------------------------------------------ */
+/*  Theme tokens — black / white / gray only                           */
+/* ------------------------------------------------------------------ */
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+  --font-pixel: 'Press Start 2P', ui-monospace, monospace;
+}
+
+:root {
+  --bg: #ffffff;
+  --fg: #18181b;
+  --muted: #52525b;
+  --line: rgba(0, 0, 0, 0.1);
+  --line-strong: rgba(0, 0, 0, 0.22);
+  --grid: rgba(0, 0, 0, 0.05);
+  color-scheme: light;
+}
+
+.dark {
+  --bg: #0a0a0a;
+  --fg: #f4f4f5;
+  --muted: #a1a1aa;
+  --line: rgba(255, 255, 255, 0.1);
+  --line-strong: rgba(255, 255, 255, 0.24);
+  --grid: rgba(255, 255, 255, 0.045);
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+::selection {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--muted);
+  border-radius: 6px;
+  opacity: 0.4;
+}
+
+section[id] {
+  scroll-margin-top: 5.5rem;
+}
+
+/* custom cursor: hide the native one on fine pointers once JS is active */
+@media (pointer: fine) {
+  .has-cursor,
+  .has-cursor a,
+  .has-cursor button,
+  .has-cursor [role='switch'],
+  .has-cursor input,
+  .has-cursor textarea,
+  .has-cursor label,
+  .has-cursor summary {
+    cursor: none;
+  }
+}
+
+/* ================================================================== */
+/*  HERO                                                               */
+/* ================================================================== */
+
+.hero-grid {
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 35%, #000 40%, transparent 100%);
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 35%, #000 40%, transparent 100%);
+}
+
+/* topographic line image — drop the file at /public/topo.png */
+.hero-topo {
+  background-image: url('/topo.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  opacity: 0.2;
+  mix-blend-mode: multiply;
+  -webkit-mask-image: radial-gradient(ellipse 92% 88% at 50% 45%, #000 58%, transparent 100%);
+  mask-image: radial-gradient(ellipse 92% 88% at 50% 45%, #000 58%, transparent 100%);
+}
+.dark .hero-topo {
+  filter: invert(1);
+  mix-blend-mode: screen;
+  opacity: 0.3;
+}
+
+/* same image as a small texture behind the photo frame */
+.topo-tile {
+  background-image: url('/topo.png');
+  background-position: center;
+  background-size: cover;
+  mix-blend-mode: multiply;
+}
+.dark .topo-tile {
+  filter: invert(1);
+  mix-blend-mode: screen;
+}
+
+/* ASCII-art name -------------------------------------------------- */
+.ascii-name {
+  position: relative;
+  z-index: 1;
+  line-height: 0;
+}
+.ascii-pre {
+  margin: 0;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px;
+  line-height: 11px;
+  letter-spacing: 0;
+  white-space: pre;
+  overflow: hidden;
+  color: var(--fg);
+  user-select: none;
+  text-shadow: 0 0 20px color-mix(in srgb, var(--fg) 22%, transparent);
+  animation: ascii-flicker 7s infinite;
+  will-change: opacity, filter;
+}
+
+/* CRT-style flicker: mostly steady, with brief dips and one hard blink */
+@keyframes ascii-flicker {
+  0%,
+  100% {
+    opacity: 1;
+    filter: brightness(1);
+  }
+  2% {
+    opacity: 0.62;
+  }
+  4% {
+    opacity: 1;
+  }
+  8% {
+    filter: brightness(1.25);
+  }
+  9% {
+    filter: brightness(1);
+  }
+  33% {
+    opacity: 0.86;
+  }
+  34% {
+    opacity: 1;
+  }
+  52% {
+    opacity: 1;
+  }
+  52.6% {
+    opacity: 0.25;
+  }
+  53.2% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 0.9;
+  }
+  71% {
+    opacity: 1;
+  }
+  88% {
+    opacity: 0.7;
+    filter: brightness(0.9);
+  }
+  89% {
+    opacity: 1;
+    filter: brightness(1);
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Scroll-down mouse indicator                                        */
+/* ------------------------------------------------------------------ */
+.scroll-cue__ringtext {
+  animation: spin 24s linear infinite;
+  transform-box: view-box;
+  transform-origin: 60px 60px;
+}
+.scroll-cue:hover .scroll-cue__ringtext {
+  animation-duration: 8s;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.scroll-cue__wheel {
+  animation: wheel 1.9s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+.scroll-cue:hover .scroll-cue__wheel {
+  animation-duration: 1s;
+}
+@keyframes wheel {
+  0% {
+    transform: translateY(-3px);
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  70% {
+    transform: translateY(5px);
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.scroll-cue__chevrons {
+  animation: chev 1.9s ease-in-out infinite;
+}
+@keyframes chev {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 0.9;
+    transform: translateY(3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .scroll-cue__ringtext,
+  .scroll-cue__wheel,
+  .scroll-cue__chevrons,
+  .ascii-pre {
+    animation: none !important;
+  }
+}
