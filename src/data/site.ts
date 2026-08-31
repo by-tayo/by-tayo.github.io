@@ -79,6 +79,47 @@ export const projects: Project[] = [
   },
 ]
 
+/** Events — conferences, hackathons, etc. Click opens a detail modal. */
+export type EventItem = {
+  name: string
+  org: string
+  date: string
+  location?: string
+  url?: string
+  description: string
+  highlights: string[]
+  results: string[]
+  images?: string[] // files in /public/events
+}
+export const events: EventItem[] = [
+  {
+    name: 'SAS Hackathon',
+    org: 'SAS',
+    date: '2025',
+    location: 'Virtual',
+    url: '',
+    description:
+      '[[What the SAS Hackathon is — SAS\'s global analytics/AI hackathon where teams tackle a real-world problem over several weeks using SAS Viya. Add a sentence or two.]]',
+    highlights: [
+      '[[What your team built / the problem you tackled]]',
+      '[[Your role on the team]]',
+    ],
+    results: ['Ranked 24 / 157 teams'],
+    images: [],
+  },
+  {
+    name: 'SAS Innovate',
+    org: 'SAS',
+    date: '2026',
+    location: 'Grapevine, TX',
+    url: '',
+    description: '[[SAS Innovate is SAS\'s annual conference — what it covers, why you went.]]',
+    highlights: ['[[A session or moment that stood out]]', '[[Someone you met / a skill you picked up]]'],
+    results: ['[[A takeaway, connection, or follow-up]]'],
+    images: [],
+  },
+]
+
 /** Certifications. */
 export const certifications = [
   { short: 'CYSA+', name: 'CompTIA CySA+', issuer: 'CompTIA', date: 'Mar 2025' },
@@ -94,7 +135,7 @@ export const experience = [
   { short: 'IBC', company: 'IBC Bank', title: 'AML Analyst', start: 'Mar 2024', end: 'Aug 2024' },
   { short: 'UT', company: 'University of Texas at Austin', title: 'Geospatial Data Analyst Intern', start: 'Jun 2023', end: 'Aug 2023' },
   { short: 'LC', company: 'Laredo College', title: 'Information Technology Help Desk', start: 'Jan 2023', end: 'May 2023' },
-  { short: 'TAMK', company: 'Texas A&M University–Kingsville', title: 'Aerospace Engineer Intern', start: 'May 2022', end: 'Aug 2022' },
-  { short: 'TAMK', company: 'Texas A&M University–Kingsville', title: 'Data Analyst Intern', start: 'May 2022', end: 'Aug 2022' },
+  { short: 'TAMUK', company: 'Texas A&M University–Kingsville', title: 'Aerospace Engineer Intern', start: 'May 2022', end: 'Aug 2022' },
+  { short: 'TAMUK', company: 'Texas A&M University–Kingsville', title: 'Data Analyst Intern', start: 'May 2022', end: 'Aug 2022' },
   { short: 'LC', company: 'Laredo College', title: 'LEAPS Student Undergraduate Researcher', start: 'Jan 2021', end: 'May 2022' },
 ] as const

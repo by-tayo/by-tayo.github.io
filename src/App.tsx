@@ -1,6 +1,7 @@
 import Hero from './components/Hero'
 import About from './components/About'
 import Experience from './components/Experience'
+import Events from './components/Events'
 import Works from './components/Works'
 import Writeups from './components/Writeups'
 import Contact from './components/Contact'
@@ -15,6 +16,7 @@ export default function App() {
       <Hero />
       <About />
       <Experience />
+      <Events />
       <Works />
       <Writeups />
       <Contact />

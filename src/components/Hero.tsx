@@ -23,7 +23,7 @@ export default function Hero() {
         <span className="sr-only">
           {site.name} — {site.role}
         </span>
-        <AsciiName text={site.name} />
+        <AsciiName text={site.name} plainClassName="text-[clamp(2.6rem,14vw,4rem)]" />
       </motion.h1>
 
       <motion.div

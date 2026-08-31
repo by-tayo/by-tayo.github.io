@@ -1,20 +1,30 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion, useMotionValue, useSpring } from 'framer-motion'
 
 /**
- * Live ASCII-art rendering of the name.
+ * Live ASCII-art rendering of the name (desktop). On small screens the ASCII
+ * grid is too coarse to read, so it falls back to plain styled text.
  * - the name is drawn to a supersampled offscreen canvas and reduced to a
  *   small brightness grid; each cell becomes a character by brightness
  * - a per-row sine keeps it alive; the cursor pushes characters outward
  * - rare horizontal row-slip = TV tracking glitch
  * - the whole block tilts in 3D toward the cursor
- * Purely decorative — the real name is in an sr-only node in <Hero>.
+ * Purely decorative — the real name is in an sr-only node nearby.
  */
 const RAMP = '  ...:::--==++**oo##%%@@$$'
 const MAX_COLS = 260
 const SS = 4
+const PLAIN_MQ = '(max-width: 639px)'
 
-export default function AsciiName({ text, charPx = 11 }: { text: string; charPx?: number }) {
+export default function AsciiName({
+  text,
+  charPx = 11,
+  plainClassName = 'text-[clamp(1.9rem,9vw,2.6rem)]',
+}: {
+  text: string
+  charPx?: number
+  plainClassName?: string
+}) {
   const CHAR_H = charPx
   const CHAR_W = charPx * 0.6
   const wrapRef = useRef<HTMLDivElement>(null)
@@ -26,7 +36,19 @@ export default function AsciiName({ text, charPx = 11 }: { text: string; charPx?
   const rotateX = useSpring(tiltX, { stiffness: 90, damping: 14 })
   const rotateY = useSpring(tiltY, { stiffness: 90, damping: 14 })
 
+  const [plain, setPlain] = useState(
+    () => typeof window !== 'undefined' && window.matchMedia(PLAIN_MQ).matches,
+  )
   useEffect(() => {
+    const mq = window.matchMedia(PLAIN_MQ)
+    const onChange = () => setPlain(mq.matches)
+    onChange()
+    mq.addEventListener('change', onChange)
+    return () => mq.removeEventListener('change', onChange)
+  }, [])
+
+  useEffect(() => {
+    if (plain) return
     const wrapEl = wrapRef.current
     const preEl = preRef.current
     if (!wrapEl || !preEl) return
@@ -200,7 +222,19 @@ export default function AsciiName({ text, charPx = 11 }: { text: string; charPx?
       ro.disconnect()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [text, charPx])
+  }, [text, charPx, plain])
+
+  if (plain) {
+    return (
+      <div className="ascii-name w-full" aria-hidden="true">
+        <span
+          className={`block text-center font-mono font-bold leading-[1.05] tracking-tight text-[var(--fg)] ${plainClassName}`}
+        >
+          {text}
+        </span>
+      </div>
+    )
+  }
 
   return (
     <motion.div
