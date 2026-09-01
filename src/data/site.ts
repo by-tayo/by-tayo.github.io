@@ -122,8 +122,8 @@ export const events: EventItem[] = [
     description:
       "SAS's month-long global hackathon (September–October 2025) — teams build an analytics or AI solution to a real-world problem on SAS Viya.",
     highlights: [
-      'Worked through the full build over the month-long competition window',
-      '[[Add: the problem your team tackled / your role]]',
+      'Solved a business case study analyzing donation-driven (nonprofit) organizations',
+      'Worked through the full build on SAS Viya over the month-long competition window',
     ],
     results: ['Ranked 24 / 157 participants', 'Earned the SAS Hackathon 2025 Participant badge'],
     images: ['events/sas-hackathon-badge.png'],
