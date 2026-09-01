@@ -93,30 +93,40 @@ export type EventItem = {
 }
 export const events: EventItem[] = [
   {
-    name: 'SAS Hackathon',
-    org: 'SAS',
-    date: '2025',
-    location: 'Virtual',
-    url: '',
-    description:
-      '[[What the SAS Hackathon is — SAS\'s global analytics/AI hackathon where teams tackle a real-world problem over several weeks using SAS Viya. Add a sentence or two.]]',
-    highlights: [
-      '[[What your team built / the problem you tackled]]',
-      '[[Your role on the team]]',
-    ],
-    results: ['Ranked 24 / 157 teams'],
-    images: [],
-  },
-  {
     name: 'SAS Innovate',
     org: 'SAS',
-    date: '2026',
+    date: 'Apr 2026',
     location: 'Grapevine, TX',
-    url: '',
-    description: '[[SAS Innovate is SAS\'s annual conference — what it covers, why you went.]]',
-    highlights: ['[[A session or moment that stood out]]', '[[Someone you met / a skill you picked up]]'],
-    results: ['[[A takeaway, connection, or follow-up]]'],
-    images: [],
+    url: 'https://www.sas.com/en_us/events/sas-innovate.html',
+    description:
+      "SAS's annual analytics and AI conference at the Gaylord Texan in Grapevine, Texas — keynotes, hands-on labs, and community events across data, DevOps, and risk.",
+    highlights: [
+      'Hands-on workshops in anti-money-laundering, DevOps, and risk analytics',
+      'Competed in a 3-hour on-site hackathon',
+      'Present for a new Guinness World Record — most people performing a double high five simultaneously',
+    ],
+    results: [],
+    images: [
+      'events/sas-innovate-1.jpg',
+      'events/sas-innovate-2.jpg',
+      'events/sas-innovate-3.jpg',
+      'events/sas-innovate-4.jpg',
+    ],
+  },
+  {
+    name: 'SAS Hackathon',
+    org: 'SAS',
+    date: 'Sept–Oct 2025',
+    location: 'Virtual',
+    url: 'https://www.sas.com/en_us/events/sas-hackathon.html',
+    description:
+      "SAS's month-long global hackathon (September–October 2025) — teams build an analytics or AI solution to a real-world problem on SAS Viya.",
+    highlights: [
+      'Worked through the full build over the month-long competition window',
+      '[[Add: the problem your team tackled / your role]]',
+    ],
+    results: ['Ranked 24 / 157 participants', 'Earned the SAS Hackathon 2025 Participant badge'],
+    images: ['events/sas-hackathon-badge.png'],
   },
 ]
 

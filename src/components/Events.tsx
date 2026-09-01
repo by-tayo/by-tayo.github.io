@@ -141,8 +141,7 @@ function EventModal({ event, onClose }: { event: EventItem; onClose: () => void 
                 key={src}
                 src={src}
                 alt={`${event.name} — photo`}
-                loading="lazy"
-                className="aspect-[4/3] w-full rounded-lg border border-[var(--line)] object-cover"
+                className="aspect-square w-full rounded-lg border border-[var(--line)] bg-[var(--fg)]/[0.04] object-contain p-1"
               />
             ))}
           </div>
