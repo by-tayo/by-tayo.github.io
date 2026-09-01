@@ -85,7 +85,6 @@ export type EventItem = {
   org: string
   date: string
   location?: string
-  url?: string
   description: string
   highlights: string[]
   results: string[]
@@ -97,7 +96,6 @@ export const events: EventItem[] = [
     org: 'SAS',
     date: 'Apr 2026',
     location: 'Grapevine, TX',
-    url: 'https://www.sas.com/en_us/events/sas-innovate.html',
     description:
       "SAS's annual analytics and AI conference at the Gaylord Texan in Grapevine, Texas — keynotes, hands-on labs, and community events across data, DevOps, and risk.",
     highlights: [
@@ -118,7 +116,6 @@ export const events: EventItem[] = [
     org: 'SAS',
     date: 'Sept–Oct 2025',
     location: 'Virtual',
-    url: 'https://www.sas.com/en_us/events/sas-hackathon.html',
     description:
       "SAS's month-long global hackathon (September–October 2025) — teams build an analytics or AI solution to a real-world problem on SAS Viya.",
     highlights: [

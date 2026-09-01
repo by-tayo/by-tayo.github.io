@@ -37,9 +37,9 @@ export default function Events() {
                     </h3>
                     <span
                       aria-hidden="true"
-                      className="text-[var(--muted)] transition group-hover:translate-x-0.5 group-hover:text-[var(--fg)]"
+                      className="text-[var(--muted)] transition group-hover:text-[var(--fg)]"
                     >
-                      ↗
+                      +
                     </span>
                   </div>
                   <p className="mt-1 text-sm text-[var(--muted)]">
@@ -149,17 +149,6 @@ function EventModal({ event, onClose }: { event: EventItem; onClose: () => void 
 
         <Section title="Highlights" items={event.highlights} />
         <Section title="Results" items={event.results} />
-
-        {event.url && (
-          <a
-            href={event.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-7 inline-flex items-center gap-1.5 rounded-full border border-[var(--line-strong)] px-3.5 py-1.5 font-mono text-xs text-[var(--muted)] transition hover:border-[var(--fg)] hover:text-[var(--fg)]"
-          >
-            Event page <span aria-hidden="true">↗</span>
-          </a>
-        )}
       </motion.div>
     </motion.div>
   )
