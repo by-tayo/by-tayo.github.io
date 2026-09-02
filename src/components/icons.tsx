@@ -71,6 +71,22 @@ export const DocsIcon = ({ className }: IconProps) => (
   </svg>
 )
 
+export const LayersIcon = ({ className }: IconProps) => (
+  <svg
+    className={className}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={2}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M12 3 2 8l10 5 10-5-10-5Z" />
+    <path d="m2 13.5 10 5 10-5" />
+  </svg>
+)
+
 export const MapPinIcon = ({ className }: IconProps) => (
   <svg
     className={className}
