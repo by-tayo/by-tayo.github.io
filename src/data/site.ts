@@ -135,7 +135,7 @@ export const certifications = [
 
 /** Work experience — newest first. `short` is the badge label. Empty `end` = incoming. */
 export const experience = [
-  { short: 'TXDOT', company: 'Texas Department of Transportation', title: 'Cybersecurity Analyst Intern', start: 'Sept 2026', end: '' },
+  { short: 'TXDOT', company: 'Texas Department of Transportation', title: 'Cybersecurity Analyst Intern', start: 'Sept 2026', end: 'Present' },
   { short: 'PYPL', company: 'PayPal', title: 'Cybersecurity Engineer Intern', start: 'Jun 2026', end: 'Present' },
   { short: 'CPSE', company: 'CPS Energy', title: 'IT Technician Intern', start: 'Jan 2026', end: 'May 2026' },
   { short: 'HEB', company: 'H-E-B, Inc.', title: 'Network Engineering Intern', start: 'May 2025', end: 'Aug 2025' },
