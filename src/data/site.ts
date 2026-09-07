@@ -11,6 +11,7 @@ export const site = {
     medium: 'https://medium.com/@bytayo',
     substack: 'https://tayeotan.substack.com/',
     mintlify: 'https://bytayo.mintlify.site/introduction',
+    layerd: 'https://lay-erd.vercel.app',
   },
 } as const
 

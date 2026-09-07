@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { site } from '../data/site'
 import AsciiName from './AsciiName'
-import { DocsIcon, MediumIcon, SubstackIcon } from './icons'
+import { DocsIcon, GlobeIcon, MediumIcon, SubstackIcon } from './icons'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
@@ -18,6 +18,12 @@ const channels = [
     label: 'Substack',
     desc: 'Theory and workflow diagrams',
     href: site.socials.substack,
+  },
+  {
+    Icon: GlobeIcon,
+    label: 'LAY/ERD',
+    desc: 'Finance, technology, and other good stuff',
+    href: site.socials.layerd,
   },
 ]
 
