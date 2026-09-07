@@ -22,7 +22,7 @@ const channels = [
   {
     Icon: GlobeIcon,
     label: 'LAY/ERD',
-    desc: 'Finance, technology, and other good stuff',
+    desc: 'Financial literacy and business risk',
     href: site.socials.layerd,
   },
 ]
