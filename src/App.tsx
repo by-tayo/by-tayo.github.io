@@ -1,5 +1,6 @@
 import Hero from './components/Hero'
 import About from './components/About'
+import Tools from './components/Tools'
 import Experience from './components/Experience'
 import Events from './components/Events'
 import Works from './components/Works'
@@ -15,6 +16,7 @@ export default function App() {
       <ThemeToggle />
       <Hero />
       <About />
+      <Tools />
       <Experience />
       <Events />
       <Works />

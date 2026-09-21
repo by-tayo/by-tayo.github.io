@@ -257,3 +257,73 @@ section[id] {
     animation: none !important;
   }
 }
+
+/* ================================================================== */
+/*  TOOLS CONVEYOR BELT                                                */
+/* ================================================================== */
+
+.marquee__viewport {
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.marquee__track {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 0.5rem;
+  padding-right: 0.5rem;
+  margin: 0;
+  list-style: none;
+  min-width: 100%;
+  animation-name: marquee-scroll;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+
+.marquee__track--reverse {
+  animation-direction: reverse;
+}
+
+.marquee:hover .marquee__track {
+  animation-play-state: paused;
+}
+
+.marquee__chip {
+  display: inline-block;
+  white-space: nowrap;
+  border: 1px solid var(--line);
+  border-radius: 9999px;
+  padding: 0.375rem 0.875rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.marquee__chip:hover {
+  border-color: var(--fg);
+  color: var(--fg);
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee__track {
+    animation: none !important;
+  }
+  .marquee__viewport {
+    overflow-x: auto;
+  }
+}

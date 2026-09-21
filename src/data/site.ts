@@ -147,3 +147,48 @@ export const experience = [
   { short: 'TAMUK', company: 'Texas A&M University–Kingsville', title: 'Data Analyst Intern', start: 'May 2022', end: 'Aug 2022' },
   { short: 'LC', company: 'Laredo College', title: 'LEAPS Student Undergraduate Researcher', start: 'Jan 2021', end: 'May 2022' },
 ] as const
+
+/**
+ * Tools marquee — two rows that scroll in opposite directions.
+ * Keep each row roughly the same length so the loop reads evenly.
+ */
+export const toolRows = [
+  [
+    'Microsoft Sentinel',
+    'Microsoft Defender XDR',
+    'Defender for Endpoint',
+    'Advanced Hunting',
+    'Splunk',
+    'KQL',
+    'Abnormal Security',
+    'Cisco Secure Endpoint',
+    'Cisco Secure Malware Analytics',
+    'VirusTotal',
+    'Dell Absolute',
+    'Nessus',
+    'ServiceNow',
+    'Microsoft Azure',
+    'AWS',
+  ],
+  [
+    'Python',
+    'PowerShell',
+    'Java',
+    'JavaScript',
+    'SQL',
+    'Git',
+    'GitLab',
+    'Azure DevOps',
+    'Docker',
+    'Kubernetes',
+    'Terraform',
+    'Linux',
+    'EJBCA',
+    'OpenSSL',
+    'Prometheus',
+    'Grafana',
+    'Elasticsearch',
+    'Apache Kafka',
+    'FastAPI',
+  ],
+] as const
