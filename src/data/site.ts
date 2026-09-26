@@ -113,6 +113,23 @@ export const events: EventItem[] = [
     ],
   },
   {
+    name: 'National Cyber League',
+    org: 'NCL · Individual Game',
+    date: 'Fall 2025',
+    location: 'Virtual',
+    description:
+      'A national, performance-based cybersecurity competition for students, with challenges across areas such as cryptography, forensics, log analysis, network traffic analysis, password cracking, OSINT, and web exploitation.',
+    highlights: [
+      'Competed in NCL for 3+ years',
+    ],
+    results: [
+      '79th percentile overall',
+      'Ranked 928 of 7,876 competitors',
+      'Scored 1,580 of 3,000 points',
+      'Earned the Platinum badge',
+    ],
+  },
+  {
     name: 'SAS Hackathon',
     org: 'SAS',
     date: 'Sept–Oct 2025',
@@ -147,6 +164,46 @@ export const experience = [
   { short: 'TAMUK', company: 'Texas A&M University–Kingsville', title: 'Data Analyst Intern', start: 'May 2022', end: 'Aug 2022' },
   { short: 'LC', company: 'Laredo College', title: 'LEAPS Student Undergraduate Researcher', start: 'Jan 2021', end: 'May 2022' },
 ] as const
+
+/** Leadership & student organizations — newest first. `short` is the badge label. */
+export type LeadershipRole = {
+  short: string
+  org: string
+  title: string
+  start: string
+  end: string
+  points: string[]
+}
+export const leadership: LeadershipRole[] = [
+  {
+    short: 'UTSA',
+    org: 'UTSA Cyber Jedis',
+    title: 'Marketing Officer',
+    start: 'Aug 2025',
+    end: 'May 2026',
+    points: [
+      'Ran the club’s presence on Instagram, LinkedIn, YouTube, and Twitch — setting up channels, photographing events, and creating content to raise awareness (579 Instagram followers).',
+      'Posted announcements for upcoming events and collaborations to the club’s 1,078-member Discord server, and shared the club’s activities and research groups with students.',
+      'Collaborated with other departments and student organizations to increase the club’s visibility.',
+      'Led 5 workshops for club members.',
+    ],
+  },
+  {
+    short: 'LC',
+    org: 'Laredo College Ethical Hackers',
+    title: 'Marketer & Treasurer',
+    start: 'Aug 2021',
+    end: 'May 2023',
+    points: [
+      'Led 5 hands-on workshops: Wi-Fi Pineapple, Flipper Zero, Raspberry Pi, Wireshark, and software development (Python, Git, and full-stack fundamentals).',
+      'Showed members how to build a XAMPP server for web development and web security practice.',
+      'Deployed images to 30+ college workstations over the network in preparation for incoming students.',
+      'Conducted meetings and coordinated study sessions with club members to keep engagement up.',
+      'Directed the club’s promotional video, increasing club visibility, and managed the LC Ethical Hackers Instagram (59 followers).',
+      'Provided library books to students and supported the club’s weekly podcast and Cybersecurity Awareness Month activities.',
+    ],
+  },
+]
 
 /**
  * Tools marquee — two rows that scroll in opposite directions.

@@ -2,6 +2,7 @@ import Hero from './components/Hero'
 import About from './components/About'
 import Tools from './components/Tools'
 import Experience from './components/Experience'
+import Leadership from './components/Leadership'
 import Events from './components/Events'
 import Works from './components/Works'
 import Writeups from './components/Writeups'
@@ -18,6 +19,7 @@ export default function App() {
       <About />
       <Tools />
       <Experience />
+      <Leadership />
       <Events />
       <Works />
       <Writeups />
