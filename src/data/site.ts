@@ -205,6 +205,51 @@ export const leadership: LeadershipRole[] = [
   },
 ]
 
+/** Undergraduate research — newest first. */
+export type ResearchItem = {
+  title: string
+  program: string
+  date: string
+  format: string
+  summary: string
+  method: string
+  findings: string[]
+  tags: string[]
+}
+export const research: ResearchItem[] = [
+  {
+    title: 'COVID-19 and Its Effects on Online Activity',
+    program: 'Undergraduate Research Opportunities (URO), LEAPS · Laredo College',
+    date: 'Fall 2021',
+    format: 'Research paper & poster',
+    summary:
+      'Examined how the pandemic changed online activity, how aware the public was of the rise in cyber threats, and how the shift online affected markets — using Netflix as a case study.',
+    method:
+      '17-question SurveyMonkey survey (33 anonymous adult respondents), built from FBI IC3, Kaspersky, IBM X-Force, and NSA data; analyzed in Excel, including a one-way ANOVA.',
+    findings: [
+      'Respondents averaged 6.61 hours online per day; 63% increased their online shopping.',
+      '82% had passwords that weren’t easily cracked, yet about 58% did not know how to protect themselves from cyberattacks.',
+      'About 70% said Netflix gave them an escape during the pandemic, and most were aware of its revenue and profit growth.',
+    ],
+    tags: ['Survey research', 'Cybercrime', 'Security awareness', 'Stock market', 'Excel', 'ANOVA'],
+  },
+  {
+    title: 'Effective Ways to Provide Password Security from Attacks',
+    program: 'Undergraduate Research Opportunities (URO), LEAPS · Laredo College',
+    date: 'Spring 2021',
+    format: 'Research paper & poster',
+    summary:
+      'Explored how password managers, password assistance tools, and memory games can help people keep strong passwords without relying on memory or written notes.',
+    method:
+      'Online survey of 11 respondents covering password habits, perceived strength, daily password use, and awareness of protection techniques.',
+    findings: [
+      '73% said they change their passwords now and then; self-rated strength split evenly between “moderate” and “secure” (45.5% each).',
+      'Many respondents were unaware of password managers, password assistance, and memory-game techniques that reduce the burden of strong passwords.',
+    ],
+    tags: ['Password security', 'Authentication', 'Password managers', 'Survey research'],
+  },
+]
+
 /**
  * Tools marquee — two rows that scroll in opposite directions.
  * Keep each row roughly the same length so the loop reads evenly.

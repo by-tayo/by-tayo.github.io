@@ -3,6 +3,7 @@ import About from './components/About'
 import Tools from './components/Tools'
 import Experience from './components/Experience'
 import Leadership from './components/Leadership'
+import Research from './components/Research'
 import Events from './components/Events'
 import Works from './components/Works'
 import Writeups from './components/Writeups'
@@ -20,6 +21,7 @@ export default function App() {
       <Tools />
       <Experience />
       <Leadership />
+      <Research />
       <Events />
       <Works />
       <Writeups />
