@@ -20,10 +20,10 @@ export default function App() {
       <About />
       <Tools />
       <Experience />
+      <Works />
+      <Events />
       <Leadership />
       <Research />
-      <Events />
-      <Works />
       <Writeups />
       <Contact />
     </>
