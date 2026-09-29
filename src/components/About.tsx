@@ -26,33 +26,12 @@ export default function About() {
           </p>
 
           <p className="mt-5 max-w-xl text-[15px] leading-relaxed text-[var(--muted)] sm:text-base">
-            I started in a <span className="text-[var(--fg)]">business program</span> and chose the harder
-            road out of it: <span className="text-[var(--fg)]">security engineering</span>. No computer
-            science degree to lean on, so I built the proof myself &mdash;{' '}
-            <span className="text-[var(--fg)]">nearly three years</span> across security engineering,
-            network engineering, IT infrastructure, AML investigations, and analytical roles at research and
-            education institutions, plus the labs and CTFs I keep running on my own time.
-          </p>
-
-          <p className="mt-5 max-w-xl text-[15px] leading-relaxed text-[var(--muted)] sm:text-base">
-            Day to day I work <span className="text-[var(--fg)]">detection and response</span> &mdash;
-            triaging alerts in <span className="text-[var(--fg)]">Microsoft Sentinel</span>,{' '}
-            <span className="text-[var(--fg)]">Defender XDR</span>, and{' '}
-            <span className="text-[var(--fg)]">Splunk</span>, writing{' '}
-            <span className="text-[var(--fg)]">KQL</span> to hunt what the alerts miss, and running email,
-            endpoint, and malware cases through{' '}
-            <span className="text-[var(--fg)]">Abnormal Security</span>,{' '}
-            <span className="text-[var(--fg)]">Cisco Secure Endpoint</span>, and{' '}
-            <span className="text-[var(--fg)]">Cisco Secure Malware Analytics</span>. On the engineering
-            side, I&rsquo;ve benchmarked{' '}
-            <span className="text-[var(--fg)]">post-quantum TLS certificates</span> against production RSA
-            at enterprise scale and built the monitoring, logging, and detection tooling you&rsquo;ll find
-            below.
-          </p>
-
-          <p className="mt-5 max-w-xl text-[15px] leading-relaxed text-[var(--muted)] sm:text-base">
-            I chase the work that tests me out of my comfort zone, and I document all of it &mdash; the
-            parts that worked and the parts that didn&rsquo;t.
+            I hold a <span className="text-[var(--fg)]">B.B.A in Cybersecurity</span> and an{' '}
+            <span className="text-[var(--fg)]">A.A.S in Cyber Defense</span>, with interests in{' '}
+            <span className="text-[var(--fg)]">secure software analysis</span> and{' '}
+            <span className="text-[var(--fg)]">business risk</span>. I recently started{' '}
+            <span className="text-[var(--fg)]">LAY/ERD</span>, where I share what I know about financial
+            literacy and business risk from my B.B.A. degree and AML background.
           </p>
 
           <p className="mt-5 text-[15px] leading-relaxed text-[var(--muted)] sm:text-base">

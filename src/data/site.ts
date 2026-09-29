@@ -93,6 +93,39 @@ export type EventItem = {
 }
 export const events: EventItem[] = [
   {
+    name: 'Rowdy CyberCon',
+    org: 'UTSA',
+    date: 'May 2026',
+    location: 'San Antonio, TX',
+    description:
+      "UTSA's cybersecurity conference and full-day team competition, bringing together students from across the region.",
+    highlights: [
+      'Full-day competition, played as a team',
+    ],
+    results: [
+      'Placed 10th as a team',
+      'Roughly 300 total participants',
+    ],
+  },
+  {
+    name: 'NCAE Cyber Games',
+    org: 'National Centers of Academic Excellence in Cybersecurity',
+    date: 'Spring 2025',
+    location: 'Southwest 1',
+    description:
+      'A national collegiate competition built specifically for defensive play — teams keep live services running and hardened against an active red team while working CTF challenges on the side.',
+    highlights: [
+      'Blue-team format: defend and harden, rather than attack',
+      'Competed in the Southwest 1 region with a team of six',
+      'Top service was SSH logins, held at 73% uptime under active attack',
+    ],
+    results: [
+      'Final score 3,318',
+      'Service points 1,983 · CTF points 1,275 · bonus 60',
+      'Captured 20 of 30 flags',
+    ],
+  },
+  {
     name: 'SAS Innovate',
     org: 'SAS',
     date: 'Apr 2026',
