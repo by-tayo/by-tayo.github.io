@@ -120,6 +120,7 @@ export const events: EventItem[] = [
       'Top service was SSH logins, held at 73% uptime under active attack',
     ],
     results: [
+      'Placed 5th in the Southwest 1 region',
       'Final score 3,318',
       'Service points 1,983 · CTF points 1,275 · bonus 60',
       'Captured 20 of 30 flags',
@@ -234,6 +235,40 @@ export const leadership: LeadershipRole[] = [
       'Conducted meetings and coordinated study sessions with club members to keep engagement up.',
       'Directed the club’s promotional video, increasing club visibility, and managed the LC Ethical Hackers Instagram (59 followers).',
       'Provided library books to students and supported the club’s weekly podcast and Cybersecurity Awareness Month activities.',
+    ],
+  },
+]
+
+/** Research groups — newest first. */
+export type ResearchGroup = {
+  name: string
+  org: string
+  role: string
+  start: string
+  end: string
+  points: string[]
+}
+export const researchGroups: ResearchGroup[] = [
+  {
+    name: 'Cyber Warfare Research Group',
+    org: 'UTSA Cyber Jedis',
+    role: 'Member',
+    start: 'Oct 2025',
+    end: 'Present',
+    points: [
+      'Study nation-state advanced persistent threat (APT) tactics and the campaigns they run.',
+      'Presented on APT groups to the research group.',
+    ],
+  },
+  {
+    name: 'Threat Hunting and Intelligence Research Group',
+    org: 'UTSA Cyber Jedis',
+    role: 'Member',
+    start: 'Oct 2025',
+    end: 'Present',
+    points: [
+      'Work through adversary tactics, techniques, and procedures (TTPs) and indicators of compromise (IOCs), mapped against MITRE ATT&CK.',
+      'Run TryHackMe and Hack The Box labs with the group to practice hunting techniques hands-on.',
     ],
   },
 ]
