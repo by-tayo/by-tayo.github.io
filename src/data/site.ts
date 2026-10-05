@@ -157,7 +157,7 @@ export const events: EventItem[] = [
       'Competed in NCL for 3+ years',
     ],
     results: [
-      '79th percentile overall',
+      'Top 12% nationally',
       'Ranked 928 of 7,876 competitors',
       'Scored 1,580 of 3,000 points',
       'Earned the Platinum badge',
