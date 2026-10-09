@@ -53,9 +53,12 @@ export const projects: Project[] = [
   {
     title: 'CloudHUB',
     summary:
-      'Self-hosted private productivity workspace powered by Nextcloud, deployed on AWS EC2 and secured with a Tailscale VPN.',
-    stack: ['Nextcloud', 'AWS EC2', 'Tailscale', 'Docker'],
-    links: [{ label: 'GitHub', href: 'https://github.com/by-tayo/CloudHUB' }],
+      'Self-hosted private productivity workspace powered by Nextcloud on AWS EC2, reachable only over a Tailscale VPN with zero inbound ports. Bulk files live on a home TrueNAS SCALE server (ZFS, running as a Hyper-V VM) whose SMB share is mounted into Nextcloud over the same tailnet, so no ports are opened on the home network. The server is rebuildable from Terraform, a Nextcloud Assistant backed by a local Ollama model adds private AI chat and summaries, and a Python Discord bot handles file uploads, document summaries, status checks, and storage alerts.',
+    stack: ['Nextcloud', 'AWS EC2', 'Tailscale', 'Docker', 'TrueNAS SCALE', 'ZFS', 'Terraform', 'Ollama', 'Python', 'Discord'],
+    links: [
+      { label: 'GitHub', href: 'https://github.com/by-tayo/CloudHUB' },
+      { label: 'Build report', href: 'https://github.com/by-tayo/CloudHUB/blob/main/report/CloudHUB-Build-Report.pdf' },
+    ],
   },
   {
     title: 'Azure SOC HomeLab',
@@ -92,6 +95,15 @@ export type EventItem = {
   images?: string[] // files in /public/events
 }
 export const events: EventItem[] = [
+  {
+    name: 'SAS Hackathon 2026',
+    org: 'SAS',
+    date: 'Oct 2026',
+    description:
+      "Back for another round of SAS's global hackathon — competing in the 2026 edition, which kicked off in October 2026.",
+    highlights: ['In progress — results to come'],
+    results: [],
+  },
   {
     name: 'Rowdy CyberCon',
     org: 'UTSA',
@@ -164,7 +176,7 @@ export const events: EventItem[] = [
     ],
   },
   {
-    name: 'SAS Hackathon',
+    name: 'SAS Hackathon 2025',
     org: 'SAS',
     date: 'Sept–Oct 2025',
     location: 'Virtual',
