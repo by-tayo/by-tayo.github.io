@@ -5,9 +5,14 @@ export const site = {
   email: 'taniaiortiz@protonmail.com',
   location: 'San Antonio, TX',
   resumeUrl: '/Tania-Ortiz-Resume.pdf', // drop the PDF in /public
+  /** Official TryHackMe badge image; it updates itself as you complete rooms. */
+  tryhackmeBadge: 'https://tryhackme-badges.s3.amazonaws.com/bytayo.png',
   socials: {
     github: 'https://github.com/by-tayo',
     linkedin: 'https://www.linkedin.com/in/tania--ortiz/',
+    tryhackme: 'https://tryhackme.com/p/bytayo',
+    // Paste your Hack The Box profile link here (app.hackthebox.com/users/<number>); it stays hidden while empty.
+    hackthebox: '',
     medium: 'https://medium.com/@bytayo',
     substack: 'https://tayeotan.substack.com/',
     mintlify: 'https://bytayo.mintlify.site/introduction',

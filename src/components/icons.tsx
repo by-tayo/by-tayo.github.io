@@ -40,6 +40,39 @@ export const MailIcon = ({ className }: IconProps) => (
   </svg>
 )
 
+export const FlagIcon = ({ className }: IconProps) => (
+  <svg
+    className={className}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={2}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M4 22V4" />
+    <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1" />
+  </svg>
+)
+
+export const BoxIcon = ({ className }: IconProps) => (
+  <svg
+    className={className}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={2}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M21 8 12 3 3 8v8l9 5 9-5V8Z" />
+    <path d="M3 8l9 5 9-5" />
+    <path d="M12 13v8" />
+  </svg>
+)
+
 export const DownloadIcon = ({ className }: IconProps) => (
   <svg
     className={className}

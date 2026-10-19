@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { site } from '../data/site'
 import AsciiName from './AsciiName'
-import { GitHubIcon, LinkedInIcon, MailIcon, MapPinIcon } from './icons'
+import { BoxIcon, FlagIcon, GitHubIcon, LinkedInIcon, MailIcon, MapPinIcon } from './icons'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
@@ -28,7 +28,9 @@ export default function Contact() {
   const social = [
     { Icon: GitHubIcon, label: 'GitHub', href: site.socials.github as string | undefined },
     { Icon: LinkedInIcon, label: 'LinkedIn', href: site.socials.linkedin as string | undefined },
-  ]
+    { Icon: FlagIcon, label: 'TryHackMe', href: site.socials.tryhackme as string | undefined },
+    { Icon: BoxIcon, label: 'Hack The Box', href: (site.socials.hackthebox as string) || undefined },
+  ].filter((r) => r.label !== 'Hack The Box' || r.href)
 
   const Row = ({
     Icon,
@@ -97,6 +99,22 @@ export default function Contact() {
                 <Row key={r.label} {...r} />
               ))}
             </ul>
+
+            <a
+              href={site.socials.tryhackme}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 inline-block rounded-lg transition hover:opacity-85"
+            >
+              <img
+                src={site.tryhackmeBadge}
+                alt="TryHackMe profile badge for bytayo: level, rank, streak, badges and rooms completed"
+                width={329}
+                height={88}
+                loading="lazy"
+                className="h-auto w-full max-w-[329px] rounded-lg"
+              />
+            </a>
           </div>
 
           <form onSubmit={onSubmit} className="space-y-3">
