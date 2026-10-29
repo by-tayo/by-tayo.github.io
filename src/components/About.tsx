@@ -40,6 +40,12 @@ export default function About() {
           </p>
 
           <p className="mt-5 text-[15px] leading-relaxed text-[var(--muted)] sm:text-base">
+            Working through TryHackMe&apos;s{' '}
+            <span className="text-[var(--fg)]">Defending Azure</span> path: Sentinel, Defender, KQL, and
+            cloud CTF challenges.
+          </p>
+
+          <p className="mt-5 text-[15px] leading-relaxed text-[var(--muted)] sm:text-base">
             <span className="text-[var(--fg)]">Investment Researcher</span> at The Investment Society. Probably
             making music now.
           </p>
