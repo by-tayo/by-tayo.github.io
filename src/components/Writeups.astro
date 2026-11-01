@@ -1,0 +1,62 @@
+---
+import { site } from '../data/site'
+import AsciiName from './AsciiName'
+import { DocsIcon, GlobeIcon, MediumIcon, SubstackIcon } from './icons'
+
+const channels = [
+  {
+    Icon: DocsIcon,
+    label: 'Mintlify',
+    desc: 'Full-depth labs, CTFs, custom tooling, and POCs',
+    href: site.socials.mintlify,
+  },
+  { Icon: MediumIcon, label: 'Medium', desc: 'Productivity notes', href: site.socials.medium },
+  {
+    Icon: SubstackIcon,
+    label: 'Substack',
+    desc: 'Theory and workflow diagrams',
+    href: site.socials.substack,
+  },
+  {
+    Icon: GlobeIcon,
+    label: 'LAY/ERD',
+    desc: 'Financial literacy and business risk',
+    href: site.socials.layerd,
+  },
+]
+---
+
+<section id="writeups" class="border-t border-[var(--line)] px-5 py-20 sm:py-28">
+  <div class="mx-auto max-w-5xl">
+    <h2 class="sr-only">Writeups</h2>
+    <div aria-hidden="true" class="mx-auto w-full max-w-sm sm:max-w-2xl md:max-w-3xl">
+      <AsciiName client:visible={{ rootMargin: '300px' }} text="Writeups" charPx={11} />
+    </div>
+
+    <ul data-reveal="slow" class="mt-12 divide-y divide-[var(--line-strong)] border-y border-[var(--line-strong)]">
+      {
+        channels.map(({ Icon, label, desc, href }) => (
+          <li>
+            <a href={href} target="_blank" rel="noopener noreferrer" class="group flex items-center gap-4 py-6 sm:gap-6">
+              <span class="grid h-11 w-11 shrink-0 place-items-center rounded-lg border border-[var(--line)] text-[var(--fg)]">
+                <Icon className="h-4 w-4" />
+              </span>
+              <div class="min-w-0 flex-1">
+                <div class="flex items-center gap-1.5">
+                  <h3 class="font-mono text-base font-bold tracking-tight text-[var(--fg)] sm:text-lg">{label}</h3>
+                  <span
+                    aria-hidden="true"
+                    class="text-[var(--muted)] transition group-hover:translate-x-0.5 group-hover:text-[var(--fg)]"
+                  >
+                    ↗
+                  </span>
+                </div>
+                <p class="mt-1 text-sm text-[var(--muted)]">{desc}</p>
+              </div>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

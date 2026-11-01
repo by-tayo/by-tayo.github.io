@@ -1,0 +1,59 @@
+---
+import { site } from '../data/site'
+import PhotoPanel from './PhotoPanel'
+import MusicPlayer from './MusicPlayer'
+import { ExternalLinkIcon } from './icons'
+---
+
+<section id="about" class="border-t border-[var(--line)] px-5 py-20 sm:py-28">
+  <div class="mx-auto flex max-w-5xl flex-col items-center gap-10 sm:flex-row sm:items-start sm:gap-12 md:gap-16">
+    <div class="w-40 shrink-0 sm:w-48 sm:pt-1 md:w-56">
+      <PhotoPanel client:visible={{ rootMargin: '200px' }} />
+    </div>
+
+    <div data-reveal="right" class="min-w-0 flex-1">
+      <p class="font-mono text-sm uppercase tracking-[0.24em] text-[var(--fg)] sm:text-base">
+        {site.tagline}
+      </p>
+
+      <p class="mt-5 max-w-xl text-[15px] leading-relaxed text-[var(--muted)] sm:text-base">
+        I hold a <span class="text-[var(--fg)]">B.B.A in Cybersecurity</span> and an{' '}
+        <span class="text-[var(--fg)]">A.A.S in Cyber Defense</span>, with interests in{' '}
+        <span class="text-[var(--fg)]">secure software analysis</span> and{' '}
+        <span class="text-[var(--fg)]">business risk</span>. I recently started{' '}
+        <span class="text-[var(--fg)]">LAY/ERD</span>, where I share what I know about financial
+        literacy and business risk from my B.B.A. degree and AML background.
+      </p>
+
+      <p class="mt-5 text-[15px] leading-relaxed text-[var(--muted)] sm:text-base">
+        <span class="text-[var(--fg)]">Security+</span>,{' '}
+        <span class="text-[var(--fg)]">CySA+</span> certified.
+      </p>
+
+      <p class="mt-5 text-[15px] leading-relaxed text-[var(--muted)] sm:text-base">
+        Working through TryHackMe&apos;s{' '}
+        <span class="text-[var(--fg)]">Defending Azure</span> path: Sentinel, Defender, KQL, and
+        cloud CTF challenges.
+      </p>
+
+      <p class="mt-5 text-[15px] leading-relaxed text-[var(--muted)] sm:text-base">
+        <span class="text-[var(--fg)]">Investment Researcher</span> at The Investment Society. Probably
+        making music now.
+      </p>
+
+      <MusicPlayer client:visible={{ rootMargin: '200px' }} />
+
+      <div class="mt-7">
+        <a
+          href={site.resumeUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 rounded-lg border border-[var(--line)] px-5 py-3 text-sm font-semibold text-[var(--fg)] transition hover:bg-[var(--fg)]/5"
+        >
+          View r&eacute;sum&eacute;
+          <ExternalLinkIcon className="h-4 w-4" />
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

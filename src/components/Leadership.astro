@@ -1,0 +1,47 @@
+---
+import { leadership } from '../data/site'
+import AsciiName from './AsciiName'
+---
+
+<section id="leadership" class="border-t border-[var(--line)] px-5 py-20 sm:py-28">
+  <div class="mx-auto max-w-5xl">
+    <h2 class="sr-only">Leadership</h2>
+    <div aria-hidden="true" class="mx-auto w-full max-w-xl sm:max-w-3xl md:max-w-4xl">
+      <AsciiName client:visible={{ rootMargin: '300px' }} text="Leadership" charPx={11} />
+    </div>
+
+    <ol class="mt-14 divide-y divide-[var(--line-strong)] border-y border-[var(--line-strong)]">
+      {
+        leadership.map((role, i) => (
+          <li
+            data-reveal
+            style={`--reveal-delay: ${Math.min(i, 5) * 0.05}s`}
+            class="flex items-start gap-4 py-6 sm:gap-6"
+          >
+            <span class="grid h-11 w-11 shrink-0 place-items-center rounded-lg border border-[var(--line)] font-mono text-[10px] font-bold tracking-tight text-[var(--fg)]">
+              {role.short}
+            </span>
+            <div class="min-w-0 flex-1">
+              <div class="flex flex-col gap-x-4 gap-y-0.5 sm:flex-row sm:items-baseline sm:justify-between">
+                <h3 class="font-mono text-base font-bold tracking-tight text-[var(--fg)] sm:text-lg">
+                  {role.org}
+                </h3>
+                <span class="shrink-0 font-mono text-xs text-[var(--muted)] sm:text-[13px]">
+                  {`${role.start} – ${role.end}`}
+                </span>
+              </div>
+              <p class="mt-1 text-sm text-[var(--muted)]">{role.title}</p>
+              <ul class="mt-3 space-y-1.5">
+                {role.points.map((point) => (
+                  <li class="relative pl-4 text-sm leading-relaxed text-[var(--muted)] before:absolute before:left-0 before:top-[0.6em] before:h-1 before:w-1 before:rounded-full before:bg-[var(--muted)]">
+                    {point}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>

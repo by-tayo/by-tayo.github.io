@@ -1,0 +1,49 @@
+---
+/**
+ * Scroll-down mouse indicator (black / white / gray).
+ * - circular "SCROLL DOWN ·" label rotating around a mouse outline
+ * - animated scroll wheel + chevrons
+ * - hover speeds everything up and brightens the ring
+ * Pure CSS: smooth scrolling comes from `html { scroll-behavior: smooth }`,
+ * which also respects prefers-reduced-motion.
+ */
+interface Props {
+  href?: string
+  class?: string
+}
+const { href = '#experience', class: className = '' } = Astro.props
+---
+
+<a
+  href={href}
+  aria-label="Scroll to content"
+  class:list={[
+    'scroll-cue group relative grid h-24 w-24 place-items-center text-[var(--muted)] transition-colors hover:text-[var(--fg)]',
+    className,
+  ]}
+>
+  <svg viewBox="0 0 120 120" class="absolute inset-0 h-full w-full">
+    <defs>
+      <path id="cue-circle" d="M60,60 m-42,0 a42,42 0 1,1 84,0 a42,42 0 1,1 -84,0"></path>
+    </defs>
+    <text class="scroll-cue__ringtext fill-current font-mono text-[10px] uppercase tracking-[0.32em]">
+      <textPath href="#cue-circle" startOffset="0">scroll down · scroll down ·&nbsp;</textPath>
+    </text>
+  </svg>
+
+  <span class="relative flex h-10 w-6 items-start justify-center rounded-full border-2 border-current pt-1.5">
+    <span class="scroll-cue__wheel block h-1.5 w-1 rounded-full bg-current"></span>
+  </span>
+
+  <svg
+    viewBox="0 0 24 24"
+    class="scroll-cue__chevrons absolute bottom-0 h-3.5 w-3.5"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2.5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="m6 9 6 6 6-6"></path>
+  </svg>
+</a>

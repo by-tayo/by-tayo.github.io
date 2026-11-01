@@ -1,0 +1,22 @@
+---
+import { site } from '../data/site'
+import ScrollCue from './ScrollCue.astro'
+import AsciiName from './AsciiName'
+---
+
+<section
+  id="home"
+  class="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-5 py-20 text-center"
+>
+  <div class="hero-grid pointer-events-none absolute inset-0"></div>
+  <div class="hero-topo pointer-events-none absolute inset-0"></div>
+
+  <h1 class="hero-title relative z-10 w-full max-w-5xl">
+    <span class="sr-only">{site.name} — {site.role}</span>
+    <AsciiName client:load text={site.name} plainClassName="text-[clamp(2.6rem,14vw,4rem)]" />
+  </h1>
+
+  <div class="hero-cue absolute bottom-6 right-6 z-10 sm:bottom-10 sm:right-10">
+    <ScrollCue href="#about" />
+  </div>
+</section>

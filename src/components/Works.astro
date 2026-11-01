@@ -1,0 +1,52 @@
+---
+import { projects } from '../data/site'
+import AsciiName from './AsciiName'
+---
+
+<section id="works" class="border-t border-[var(--line)] px-5 py-20 sm:py-28">
+  <div class="mx-auto max-w-5xl">
+    <h2 class="sr-only">Selected works</h2>
+    <div aria-hidden="true" class="mx-auto w-full max-w-[17rem] sm:max-w-md md:max-w-xl">
+      <AsciiName client:visible={{ rootMargin: '300px' }} text="Works" charPx={11} />
+    </div>
+
+    <ol class="mt-12 divide-y divide-[var(--line-strong)] border-y border-[var(--line-strong)]">
+      {
+        projects.map((project, i) => (
+          <li data-reveal style={`--reveal-delay: ${Math.min(i, 4) * 0.05}s`} class="py-9 sm:py-10">
+            <div class="flex items-start justify-between gap-4">
+              <h3 class="font-mono text-lg font-bold tracking-tight text-[var(--fg)] sm:text-xl">
+                {project.title}
+              </h3>
+              <span class="shrink-0 pt-1 font-mono text-sm text-[var(--muted)]">
+                /{String(i + 1).padStart(2, '0')}
+              </span>
+            </div>
+
+            <p class="mt-4 max-w-3xl font-mono text-[13px] leading-relaxed text-[var(--muted)] sm:text-sm">
+              {project.summary}
+            </p>
+
+            <div class="mt-5 flex flex-wrap gap-2">
+              {project.stack.map((tag) => (
+                <span class="rounded-full border border-[var(--line)] px-3.5 py-1.5 font-mono text-xs text-[var(--muted)]">
+                  {tag}
+                </span>
+              ))}
+              {project.links.map((link) => (
+                <a
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-1.5 rounded-full border border-[var(--line-strong)] px-3.5 py-1.5 font-mono text-xs text-[var(--muted)] transition hover:border-[var(--fg)] hover:text-[var(--fg)]"
+                >
+                  {link.label} <span aria-hidden="true">↗</span>
+                </a>
+              ))}
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>

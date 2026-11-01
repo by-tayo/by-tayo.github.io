@@ -36,9 +36,9 @@ export default function AsciiName({
   const rotateX = useSpring(tiltX, { stiffness: 90, damping: 14 })
   const rotateY = useSpring(tiltY, { stiffness: 90, damping: 14 })
 
-  const [plain, setPlain] = useState(
-    () => typeof window !== 'undefined' && window.matchMedia(PLAIN_MQ).matches,
-  )
+  // null = not hydrated yet (server render). The server can't know the viewport,
+  // so it emits the plain-text fallback; the live ASCII takes over after hydration.
+  const [plain, setPlain] = useState<boolean | null>(null)
   useEffect(() => {
     const mq = window.matchMedia(PLAIN_MQ)
     const onChange = () => setPlain(mq.matches)
@@ -48,7 +48,7 @@ export default function AsciiName({
   }, [])
 
   useEffect(() => {
-    if (plain) return
+    if (plain !== false) return
     const wrapEl = wrapRef.current
     const preEl = preRef.current
     if (!wrapEl || !preEl) return
@@ -224,11 +224,14 @@ export default function AsciiName({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [text, charPx, plain])
 
-  if (plain) {
+  if (plain !== false) {
     return (
       <div className="ascii-name w-full" aria-hidden="true">
         <span
-          className={`block text-center font-mono font-bold leading-[1.05] tracking-tight text-[var(--fg)] ${plainClassName}`}
+          // Before hydration on desktop, keep the space but hide the text so it doesn't flash before the ASCII.
+          className={`block text-center font-mono font-bold leading-[1.05] tracking-tight text-[var(--fg)] ${plainClassName} ${
+            plain === null ? 'sm:invisible' : ''
+          }`}
         >
           {text}
         </span>

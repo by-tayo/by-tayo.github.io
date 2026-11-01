@@ -1,0 +1,82 @@
+---
+import '../styles/global.css'
+import { site } from '../data/site'
+
+interface Props {
+  title?: string
+  description?: string
+}
+
+const {
+  title = `${site.name} — ${site.role}`,
+  description = 'Tania Ortiz — security engineering, networking, IT infrastructure, analytical roles, and AML. Labs, CTFs, custom tooling, and POCs.',
+} = Astro.props
+
+const canonical = new URL(Astro.url.pathname, Astro.site)
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Runs before paint: restore the saved theme and flag that JS is on (enables scroll reveals). -->
+    <script is:inline>
+      (function () {
+        var root = document.documentElement
+        root.classList.add('js')
+        try {
+          var t = localStorage.getItem('theme')
+          if (t === 'light') root.classList.remove('dark')
+          else root.classList.add('dark')
+        } catch (e) {
+          root.classList.add('dark')
+        }
+      })()
+    </script>
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={site.name} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={site.tagline} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <slot />
+
+    <!--
+      Scroll reveal: replaces framer-motion's whileInView for server-rendered sections.
+      Elements marked data-reveal fade/slide in once, the first time they enter the viewport.
+      Without JS (no .js class on <html>) everything is simply visible.
+    -->
+    <script>
+      const els = document.querySelectorAll<HTMLElement>('[data-reveal]')
+      if (!('IntersectionObserver' in window)) {
+        els.forEach((el) => el.classList.add('is-revealed'))
+      } else {
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-revealed')
+                io.unobserve(entry.target)
+              }
+            }
+          },
+          { rootMargin: '0px 0px -60px 0px' },
+        )
+        els.forEach((el) => io.observe(el))
+      }
+    </script>
+  </body>
+</html>

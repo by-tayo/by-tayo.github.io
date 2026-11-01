@@ -28,6 +28,9 @@ export default function MusicPlayer() {
     a.addEventListener('timeupdate', onTime)
     a.addEventListener('loadedmetadata', onMeta)
     a.addEventListener('ended', onEnd)
+    // The <audio> tag is server-rendered, so metadata can finish loading before this
+    // island hydrates and the listener above would miss it. Read it directly if ready.
+    if (a.readyState >= 1) onMeta()
     return () => {
       a.removeEventListener('timeupdate', onTime)
       a.removeEventListener('loadedmetadata', onMeta)

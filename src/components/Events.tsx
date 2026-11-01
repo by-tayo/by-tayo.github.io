@@ -16,11 +16,8 @@ export default function Events() {
           <AsciiName text="Events" charPx={11} />
         </div>
 
-        <motion.ol
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.6, ease: EASE }}
+        <ol
+          data-reveal="slow"
           className="mt-12 divide-y divide-[var(--line-strong)] border-y border-[var(--line-strong)]"
         >
           {events.map((ev) => (
@@ -51,7 +48,7 @@ export default function Events() {
               </button>
             </li>
           ))}
-        </motion.ol>
+        </ol>
       </div>
 
       <AnimatePresence>{open && <EventModal event={open} onClose={() => setOpen(null)} />}</AnimatePresence>

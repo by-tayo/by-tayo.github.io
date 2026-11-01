@@ -1,0 +1,78 @@
+---
+import { research, researchGroups } from '../data/site'
+import AsciiName from './AsciiName'
+---
+
+<section id="research" class="border-t border-[var(--line)] px-5 py-20 sm:py-28">
+  <div class="mx-auto max-w-5xl">
+    <h2 class="sr-only">Research</h2>
+    <div aria-hidden="true" class="mx-auto w-full max-w-md sm:max-w-xl md:max-w-2xl">
+      <AsciiName client:visible={{ rootMargin: '300px' }} text="Research" charPx={11} />
+    </div>
+
+    <p class="mt-14 font-mono text-xs uppercase tracking-[0.2em] text-[var(--fg)]">Research groups</p>
+    <ol class="mt-4 divide-y divide-[var(--line-strong)] border-y border-[var(--line-strong)]">
+      {
+        researchGroups.map((g, i) => (
+          <li data-reveal style={`--reveal-delay: ${Math.min(i, 5) * 0.05}s`} class="py-6">
+            <div class="flex flex-col gap-x-4 gap-y-0.5 sm:flex-row sm:items-baseline sm:justify-between">
+              <h3 class="font-mono text-base font-bold tracking-tight text-[var(--fg)] sm:text-lg">{g.name}</h3>
+              <span class="shrink-0 font-mono text-xs text-[var(--muted)] sm:text-[13px]">{`${g.start} – ${g.end}`}</span>
+            </div>
+            <p class="mt-1 text-sm text-[var(--muted)]">
+              {g.org} · {g.role}
+            </p>
+            <ul class="mt-3 space-y-1.5">
+              {g.points.map((pt) => (
+                <li class="flex max-w-3xl gap-2 text-sm leading-relaxed text-[var(--muted)]">
+                  <span class="text-[var(--fg)]">&ndash;</span>
+                  {pt}
+                </li>
+              ))}
+            </ul>
+          </li>
+        ))
+      }
+    </ol>
+
+    <p class="mt-14 font-mono text-xs uppercase tracking-[0.2em] text-[var(--fg)]">Undergraduate research</p>
+    <ol class="mt-4 divide-y divide-[var(--line-strong)] border-y border-[var(--line-strong)]">
+      {
+        research.map((item, i) => (
+          <li data-reveal style={`--reveal-delay: ${Math.min(i, 5) * 0.05}s`} class="py-7">
+            <div class="flex flex-col gap-x-4 gap-y-0.5 sm:flex-row sm:items-baseline sm:justify-between">
+              <h3 class="font-mono text-base font-bold tracking-tight text-[var(--fg)] sm:text-lg">{item.title}</h3>
+              <span class="shrink-0 font-mono text-xs text-[var(--muted)] sm:text-[13px]">{item.date}</span>
+            </div>
+            <p class="mt-1 text-sm text-[var(--muted)]">
+              {item.program} · {item.format}
+            </p>
+
+            <p class="mt-4 max-w-3xl text-sm leading-relaxed text-[var(--fg)]">{item.summary}</p>
+
+            <p class="mt-4 font-mono text-xs uppercase tracking-[0.2em] text-[var(--fg)]">Method</p>
+            <p class="mt-1.5 max-w-3xl text-sm leading-relaxed text-[var(--muted)]">{item.method}</p>
+
+            <p class="mt-4 font-mono text-xs uppercase tracking-[0.2em] text-[var(--fg)]">Findings</p>
+            <ul class="mt-1.5 space-y-1.5">
+              {item.findings.map((f) => (
+                <li class="flex max-w-3xl gap-2 text-sm leading-relaxed text-[var(--muted)]">
+                  <span class="text-[var(--fg)]">&ndash;</span>
+                  {f}
+                </li>
+              ))}
+            </ul>
+
+            <div class="mt-4 flex flex-wrap gap-2">
+              {item.tags.map((t) => (
+                <span class="rounded-md border border-[var(--line)] px-2 py-0.5 font-mono text-[11px] text-[var(--muted)]">
+                  {t}
+                </span>
+              ))}
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
