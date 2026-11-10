@@ -101,15 +101,6 @@ export type EventItem = {
 }
 export const events: EventItem[] = [
   {
-    name: 'SAS Hackathon 2026',
-    org: 'SAS',
-    date: 'Oct 2026',
-    description:
-      "Back for another round of SAS's global hackathon — competing in the 2026 edition, which kicked off in October 2026.",
-    highlights: ['In progress — results to come'],
-    results: [],
-  },
-  {
     name: 'Rowdy CyberCon',
     org: 'UTSA',
     date: 'May 2026',
